@@ -11,11 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.learnby.ui.theme.LearnByTheme
 
@@ -67,7 +64,7 @@ fun VistaQuestion() {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.background(Color.Gray, shape = RoundedCornerShape(100.dp))
-                .padding(bottom = 50.dp)
+                .padding(bottom = 40.dp)
         ) {
             val image = painterResource(com.example.learnby.R.drawable.logopython)
             Image(
