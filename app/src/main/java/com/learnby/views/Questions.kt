@@ -47,8 +47,8 @@ fun VistaQuestion() {
                 text = "Fallos"
             )
         }
-        val image = painterResource(id = R.drawable._848152fcef1014c0b5e4967)
-        Image(painter = image, contentDescription = null)
+        //val image = painterResource(id = R.drawable._848152fcef1014c0b5e4967)
+        //Image(painter = image, contentDescription = null)
         /*Button(onClick = { /*TODO*/ }) {
             Text("hola")
         }
