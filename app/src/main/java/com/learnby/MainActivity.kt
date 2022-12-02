@@ -12,7 +12,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.learnby.navigation.Routes
 import com.learnby.ui.theme.LearnByTheme
 import com.learnby.views.LoginPage
 
