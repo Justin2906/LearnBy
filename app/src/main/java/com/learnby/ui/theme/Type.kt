@@ -1,4 +1,4 @@
-package com.example.learnby.ui.theme
+package com.learnby.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
