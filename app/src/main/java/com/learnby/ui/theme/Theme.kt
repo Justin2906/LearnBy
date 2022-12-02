@@ -1,4 +1,4 @@
-package com.example.learnby.ui.theme
+package com.learnby.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
