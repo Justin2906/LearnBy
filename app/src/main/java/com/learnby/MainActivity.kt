@@ -38,7 +38,6 @@ class MainActivity : ComponentActivity() {
 fun DefaultPreview() {
     LearnByTheme {
         ScreenLogin()
-
     }
 }
 
