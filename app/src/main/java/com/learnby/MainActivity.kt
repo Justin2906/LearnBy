@@ -10,6 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.learnby.ui.theme.LearnByTheme
+import com.learnby.views.CursesList
+import com.learnby.views.VistaCursos
+import com.learnby.views.VistaQuestion
+import com.learnby.views.cursosList
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
