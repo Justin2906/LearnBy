@@ -9,11 +9,12 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.learnby.navigation.Routes
 import com.learnby.ui.theme.LearnByTheme
-import com.learnby.views.CursesList
-import com.learnby.views.VistaCursos
-import com.learnby.views.VistaQuestion
-import com.learnby.views.cursosList
+import com.learnby.views.LoginPage
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +26,21 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    ScreenLogin()
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun ScreenLogin(){
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = Routes.Login.route) {
+
+        composable(Routes.Login.route) {
+            LoginPage(navController = navController)
         }
     }
 }
