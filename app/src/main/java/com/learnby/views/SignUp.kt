@@ -12,18 +12,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.learnby.ui.theme.LearnByTheme
 
 @Composable
-fun SignUp(navController: NavHostController) {
+fun SignUp(/*navController: NavHostController*/) {
     Column(
         modifier = Modifier.padding(20.dp),
         verticalArrangement = Arrangement.Center,
@@ -34,13 +32,19 @@ fun SignUp(navController: NavHostController) {
         val password = remember { mutableStateOf(TextFieldValue()) }
         val email = remember { mutableStateOf(TextFieldValue()) }
 
-        Text(text = "Login", style = TextStyle(fontSize = 40.sp, fontFamily = FontFamily.Cursive))
+        Text(text = "Sign Up", style = TextStyle(fontSize = 40.sp))
 
         Spacer(modifier = Modifier.height(20.dp))
         TextField(
             label = { Text(text = "Username") },
             value = username.value,
             onValueChange = { username.value = it })
+
+        Spacer(modifier = Modifier.height(20.dp))
+        TextField(
+            label = { Text(text = "Email")},
+            value = email.value,
+            onValueChange = {email.value = it})
 
         Spacer(modifier = Modifier.height(20.dp))
         TextField(
@@ -51,12 +55,6 @@ fun SignUp(navController: NavHostController) {
             onValueChange = { password.value = it })
 
         Spacer(modifier = Modifier.height(20.dp))
-        TextField(
-            label = { Text(text = "email")},
-            value = email.value,
-            onValueChange = {email.value = it})
-
-        Spacer(modifier = Modifier.height(20.dp))
         Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
             Button(
                 onClick = { },
@@ -65,7 +63,7 @@ fun SignUp(navController: NavHostController) {
                     .fillMaxWidth()
                     .height(50.dp)
             ) {
-                Text(text = "Login")
+                Text(text = "Sign Up")
             }
         }
     }
@@ -73,5 +71,8 @@ fun SignUp(navController: NavHostController) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
+    LearnByTheme {
+        SignUp()
+    }
 
 }
