@@ -46,6 +46,31 @@ class MainActivity : ComponentActivity() {
 fun VistaQuestion() {
         Column(
             modifier = Modifier
+
+                .padding(35.dp)
+                ){
+            Text(
+                text = "Aciertos"
+            )
+            Text(
+                text = "Fallos"
+            )
+        }
+        //val image = painterResource(id = R.drawable._848152fcef1014c0b5e4967)
+        //Image(painter = image, contentDescription = null)
+        /*Button(onClick = { /*TODO*/ }) {
+            Text("hola")
+        }
+        Text(
+            text = "hola",
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)
+        )
+        Text(
+            text = "hola",
+            fontSize = 16.sp
+        )*/
+        
                 .fillMaxWidth()
                 .fillMaxHeight()
                 .background(
@@ -185,6 +210,7 @@ fun VistaQuestion() {
                         }
                     }
                 }
+
 
     }
 
