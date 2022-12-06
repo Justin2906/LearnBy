@@ -1,8 +1,5 @@
 package com.learnby.views
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -17,7 +14,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.learnby.R
@@ -27,8 +23,7 @@ import com.learnby.ui.theme.LearnByTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-
-
+/*
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +40,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+*/
 
 @Composable
 fun VistaMenu() {
@@ -56,7 +52,6 @@ fun VistaMenu() {
         Routes_menu.Pantalla_confi,
         Routes_menu.Cerrar_sesion
     )
-
     Scaffold(
         scaffoldState = scaffoldState,
         topBar ={TopBar(scope,scaffoldState)},
@@ -66,63 +61,61 @@ fun VistaMenu() {
             navController,
             menu_items = navigationItems)}
     ){
-            NavigationHost(navController)
+
     }
 }
 @Composable
 fun TopBar(
     scope: CoroutineScope,
     scaffoldState: ScaffoldState
-){
-    var showMenu by remember{
-        mutableStateOf(value = false)
-    }
-    TopAppBar (
-
-        title = { Text(text = "LearnBy")},
-        navigationIcon = {
-            IconButton(onClick = {
-                scope.launch {
-                    scaffoldState.drawerState.open()
-                }
-            }) {
-                Icon(imageVector = Icons.Filled.Menu,
-                    contentDescription =  "Icono de menu")
-            }
-
-        },
-        actions = {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(imageVector = Icons.Filled.Refresh,
-                    contentDescription = "Boton refrescar" )
-
-            }
-            IconButton(onClick = { showMenu = !showMenu }) {
-                Icon(imageVector = Icons.Filled.MoreVert,
-                    contentDescription = "Mas opciones" )
-
-            }
-            DropdownMenu(expanded = showMenu,
-                onDismissRequest = { showMenu= false },
-                modifier = Modifier.width(150.dp)
-            ) {
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Filled.Person,
-                    contentDescription = "Idiomas")
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Text(text = "Idiomas")
-                }
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Filled.Share,
-                        contentDescription = "Compartir")
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Text(text = "Compartir")
-                }
-            }
-            
+    ){
+        var showMenu by remember{
+            mutableStateOf(value = false)
         }
-    )
-}
+        TopAppBar (
+            title = { Text(text = "LearnBy")},
+            navigationIcon = {
+                IconButton(onClick = {
+                    scope.launch {
+                        scaffoldState.drawerState.open()
+                    }
+                }) {
+                    Icon(imageVector = Icons.Filled.Menu,
+                        contentDescription =  "Icono de menu")
+                }
+            },
+            actions = {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(imageVector = Icons.Filled.Refresh,
+                        contentDescription = "Boton refrescar" )
+
+                }
+                IconButton(onClick = { showMenu = !showMenu }) {
+                    Icon(imageVector = Icons.Filled.MoreVert,
+                        contentDescription = "Mas opciones" )
+
+                }
+                DropdownMenu(expanded = showMenu,
+                    onDismissRequest = { showMenu= false },
+                    modifier = Modifier.width(150.dp)
+                ) {
+                    DropdownMenuItem(onClick = { /*TODO*/ }) {
+                        Icon(imageVector = Icons.Filled.Person,
+                        contentDescription = "Idiomas")
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(text = "Idiomas")
+                    }
+                    DropdownMenuItem(onClick = { /*TODO*/ }) {
+                        Icon(imageVector = Icons.Filled.Share,
+                            contentDescription = "Compartir")
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(text = "Compartir")
+                    }
+                }
+
+            }
+        )
+    }
 
 @Composable
 fun Drawer(
@@ -161,7 +154,6 @@ fun Drawer(
 fun DrawerItem(item: Routes_menu,
      onItemClick: (Routes_menu) -> Unit
 ){
-
     Row (
         modifier = Modifier
             .fillMaxWidth()
@@ -182,9 +174,7 @@ fun DrawerItem(item: Routes_menu,
     }
 }
 
-
-
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun VistaMenuPreview() {
     LearnByTheme {

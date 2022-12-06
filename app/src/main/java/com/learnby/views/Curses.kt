@@ -1,8 +1,5 @@
 package com.learnby.views
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -10,10 +7,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.typography
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +16,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.learnby.R
 import androidx.compose.ui.unit.dp
@@ -32,9 +26,28 @@ data class Cursos(
     val description: List<String>
 )
 
-val cursosList = listOf(Cursos(R.drawable.pythoncurso, tittle = "Curso Basico Python", listOf("Declaracion de variables", "Uso Condicionales", "Uso de bucles")),
-    Cursos(R.drawable.java, tittle = "Curso Basico Java", listOf("Declaracion de variables", "Uso Condicionales", "Uso de bucles")),
-    Cursos(R.drawable.java_script1, tittle = "Curso Basico JavaScript", listOf("Declaracion de variables", "Uso Condicionales", "Uso de bucles")),
+val cursosList = listOf(
+    Cursos(
+        R.drawable.pythoncurso, tittle = "Curso Basico Python",
+        listOf("Declaracion de variables",
+            "Uso Condicionales",
+            "Uso de bucles"
+        )
+    ),
+    Cursos(
+        R.drawable.java,
+        tittle = "Curso Basico Java",
+        listOf("Declaracion de variables",
+            "Uso Condicionales", "Uso de bucles")
+
+    ),
+    Cursos(
+        R.drawable.java_script1,
+        tittle = "Curso Basico JavaScript",
+        listOf("Declaracion de variables",
+            "Uso Condicionales",
+            "Uso de bucles")
+    ),
 )
 
 @Composable
@@ -42,6 +55,8 @@ fun VistaCursos(){
     Column(
         modifier = Modifier
             .background(Color(0xFF272928))
+            .padding(top = 16.dp)
+
     ) {
         Text(text = "Cursos Disponibles", style = typography.h5, color = Color.White, modifier = Modifier.align(Alignment.CenterHorizontally))
 
@@ -51,7 +66,7 @@ fun VistaCursos(){
 
 @Composable
 fun CursesCard(cursos: Cursos){
-    val image = painterResource(id = cursos.imageResource)
+    val image = painterResource(cursos.imageResource)
         Surface(
             shape = RoundedCornerShape(8.dp),
             elevation = 8.dp,
@@ -96,13 +111,12 @@ fun CursesCard(cursos: Cursos){
 
 @Composable
 fun CursesList(cursosList: List<Cursos>){
-    LazyColumn{
+    LazyColumn(modifier = Modifier.padding(top = 70.dp)){
         items(cursosList){curso ->
             CursesCard(curso)
         }
     }
 }
-
 
 @Preview
 @Composable

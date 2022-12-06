@@ -7,7 +7,7 @@ sealed class Routes_menu(
     val title : String,
     val ruta : String
 ){
-    object  Pantalla_Perfil: Routes_menu(R.drawable.perfil, title = "Perfil", ruta = "Pantalla_Perfil")
+    object Pantalla_Perfil: Routes_menu(R.drawable.perfil, title = "Perfil", ruta = "Pantalla_Perfil")
     object Pantalla_confi: Routes_menu(R.drawable.configuracion, title = "Configuracion", ruta = "Pantalla_confi")
     object Cerrar_sesion: Routes_menu(R.drawable.cerrar_sesion, title = "Cerrar sesion", ruta = "Cerrar_sesion")
 }
