@@ -82,8 +82,8 @@ fun VistaCursos() {
             menu_items = navigationItems)},
 
     ){
-        CircularProgressBar(percentage = 0.7f, number = 100)
-        //Cursos()
+        //CircularProgressBar(percentage = 0.7f, number = 100)
+        Cursos()
     }
 
 }
