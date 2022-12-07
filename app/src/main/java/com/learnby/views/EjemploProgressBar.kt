@@ -1,14 +1,11 @@
 package com.learnby.views
 
-import android.graphics.Color
-import android.icu.text.DateTimePatternGenerator.DisplayWidth
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Card
-import androidx.compose.material.SnackbarDuration
+
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -55,7 +52,7 @@ fun CircularProgressBar(
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
-            .size(radius * 2f)
+            .size(radius * 2f),
     ) {
         Canvas(modifier = Modifier.size(radius * 2f)) {
             drawArc(
