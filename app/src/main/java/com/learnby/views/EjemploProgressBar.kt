@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.Delay
 
+//Ejemplo de Progress Bar
 @Composable
 fun CircularProgressBar(
     percentage: Float,
