@@ -1,19 +1,15 @@
 package com.learnby.views
 
-import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,97 +20,34 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.learnby.R
-import com.learnby.navigation.Routes_menu
-import com.learnby.ui.theme.LearnByTheme
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import com.learnby.model.Python
+import com.learnby.model.pythonList
+import com.learnby.navigation.Routes
 
-
-data class Python(
-    @DrawableRes val imageResource: Int,
-    val title: String,
-    val description: List<String>
-)
-
-val pythonList = listOf(
-    Python(
-        R.drawable.uno,
-        title = "Tipos de Datos Primitivos Simples",
-        listOf("- Números (numbers): Secuencia de dígitos (pueden incluir el - para negativos y el . para decimales) que representan números.",
-                "Ejemplo. 0, -1, 3.1415",
-                "- Cadenas (strings): Secuencia de caracteres alfanuméricos que representan texto. Se escriben entre comillas simples o dobles.",
-                "Ejemplo. ‘Hola’, “Adiós”",
-                "- Booleanos (boolean): Contiene únicamente dos elementos True y False que representan los valores lógicos verdadero y falso respectivamente.")
-    ),
-    Python(
-        R.drawable.uno,
-        title = "Tipos de datos primitivos compuestos",
-        listOf("- Listas (lists): Colecciones de objetos que representan secuencias ordenadas de objetos de distintos tipos. Se representan con corchetes y los elementos se separan por comas.",
-                "- Tuplas (tuples). Colecciones de objetos que representan secuencias ordenadas de objetos de distintos tipos. A diferencia de las listas son inmutables, es decir, que no cambian durante la ejecución.",
-                "- Diccionarios (dictionaries): Colecciones de objetos con una clave asociada. Se representan con llaves, los pares separados por comas y cada par contiene una clave y un objeto asociado separados por dos puntos.")
-    ),
-    Python(
-        R.drawable.aritmeticos,
-        title = "Operadores aritméticos",
-        listOf("+ (suma), - (resta), * (producto), / (cociente), // (cociente división entera), % (resto división entera), ** (potencia).")
-    ),
-    Python(
-        R.drawable.logicos,
-        title = "Operadores lógicos",
-        listOf("== (igual que), > (mayor que), < (menor que), >= (mayor o igual que), <= (menor o igual que), != (distinto de).")
-    ),
-    Python(
-        R.drawable.subcadenas,
-        title = "Subcadenas",
-        listOf("c[i:j:k] : Devuelve la subcadena de c desde el carácter con el índice i hasta el carácter anterior al índice j, tomando caracteres cada k.")
-    ),
-    Python(
-        R.drawable.funcadenas,
-        title = "Funciones de cadenas",
-        listOf("- len(c) : Devuelve el número de caracteres de la cadena c.",
-                "- min(c) : Devuelve el carácter menor de la cadena c.",
-                "- max(c) : Devuelve el carácter mayor de la cadena c.",
-                "- c.upper() : Devuelve la cadena con los mismos caracteres que la cadena c pero en mayúsculas.",
-                "- c.lower() : Devuelve la cadena con los mismos caracteres que la cadena c pero en minúsculas.",
-                "- c.title() : Devuelve la cadena con los mismos caracteres que la cadena c con el primer carácter en mayúsculas y el resto en minúsculas.",
-                "- c.split(delimitador) : Devuelve la lista formada por las subcadenas que resultan de partir la cadena c usando como delimitador la cadena delimitador. Si no se especifica el delimitador utiliza por defecto el espacio en blanco.")
-    )
-)
 
 @Composable
-fun VistaPythonCurso() {
-    val navController = rememberNavController()
-    val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-    val navigationItems = listOf(
-        Routes_menu.Pantalla_Perfil,
-        Routes_menu.Pantalla_confi,
-        Routes_menu.Cerrar_sesion
-    )
-    Scaffold(
-        scaffoldState = scaffoldState,
+fun VistaPythonCurso(navController: NavController) {
+
+    /*
         topBar ={TopBarPy(scope,scaffoldState)},
         drawerContent = {DrawerPy(
             scope,
             scaffoldState,
             navController,
             menu_items = navigationItems)},
+            */
 
-        ){
-        CursoPython()
-    }
-
+    CursoPython(navController)
 }
 
+/*
 @Composable
 fun TopBarPy(
     scope: CoroutineScope,
@@ -230,12 +163,12 @@ fun DrawerItemPy(item: Routes_menu,
         )
     }
 }
-
+*/
 
 @Composable
-fun Documentacion(python: Python){
+fun Documentacion(python: Python) {
 
-    val image =  painterResource(python.imageResource)
+    val image = painterResource(python.imageResource)
 
     Surface(
         modifier = Modifier
@@ -271,7 +204,7 @@ fun Documentacion(python: Python){
                 color = Color.White
             )
 
-            for (description in python.description){
+            for (description in python.description) {
                 Text(
                     text = description,
                     style = MaterialTheme.typography.body2,
@@ -283,14 +216,15 @@ fun Documentacion(python: Python){
         }
     }
 }
+
 @Composable
-fun CursoPython(){
+fun CursoPython(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
             .background(Color(0xFF212338))
-    ){
+    ) {
         Column(
             modifier = Modifier
                 .height(210.dp)
@@ -298,9 +232,11 @@ fun CursoPython(){
                 .fillMaxWidth()
         ) {
 
-            Box(modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(8.dp)){
+            Box(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(8.dp)
+            ) {
                 CircularProgressBar(percentage = 0.7f, number = 100)
             }
 
@@ -312,9 +248,9 @@ fun CursoPython(){
                     .align(Alignment.CenterHorizontally)
                     .padding(8.dp)
             )
-            
+
             Button(
-                onClick = { },
+                onClick = { navController.navigate(Routes.Ques.route) },
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
@@ -335,11 +271,11 @@ fun CircularProgressBarPy(
     number: Int,
     fontSize: TextUnit = 28.sp,
     radius: Dp = 50.dp,
-    color: androidx.compose.ui.graphics.Color = androidx.compose.ui.graphics.Color.Green,
+    color: Color = Color.Green,
     strokeWidth: Dp = 8.dp,
     animDuration: Int = 1000,
     animDelay: Int = 0
-){
+) {
     var animationPlayed by remember {
         mutableStateOf(false)
     }
@@ -352,7 +288,7 @@ fun CircularProgressBarPy(
 
     )
 
-    LaunchedEffect(key1 = true){
+    LaunchedEffect(key1 = true) {
         animationPlayed = true
     }
 
@@ -377,17 +313,18 @@ fun CircularProgressBarPy(
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
 
-        )
+            )
     }
 
 }
 
 @Composable
-fun PythonList(pythonList: List<Python>){
-    LazyColumn(modifier = Modifier
-        .background(Color(0xFF212338))
-    ){
-        items(pythonList){python ->
+fun PythonList(pythonList: List<Python>) {
+    LazyColumn(
+        modifier = Modifier
+            .background(Color(0xFF212338))
+    ) {
+        items(pythonList) { python ->
             Documentacion(python)
         }
     }
@@ -395,7 +332,7 @@ fun PythonList(pythonList: List<Python>){
 
 @Preview
 @Composable
-fun PreviewVistaCursos2(){
-   VistaPythonCurso()
+fun PreviewVistaCursos2() {
+    VistaPythonCurso(navController = rememberNavController())
 }
 

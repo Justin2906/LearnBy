@@ -5,17 +5,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.learnby.navigation.Routes.*
-import com.learnby.views.LoginPage
-import com.learnby.views.SignUpPage
-import com.learnby.views.VistaCursos
+import com.learnby.views.*
 
 
 @Composable
 fun NavigationHost() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Login.route){
-        composable(Login.route){
+    NavHost(navController = navController, startDestination = Login.route) {
+        composable(Login.route) {
             LoginPage(
                 navSignUp = {
                     navController.navigate(SignUp.route)
@@ -25,17 +23,17 @@ fun NavigationHost() {
                 }
             )
         }
-        composable(SignUp.route){
+        composable(SignUp.route) {
             SignUpPage()
-
         }
         composable(Curses.route) {
-            VistaCursos()
+            VistaCursos(navController)
         }
-        composable(Routes_menu.Cerrar_sesion.ruta){
-            SignUpPage()
+        composable(Ques.route) {
+            VistaQuestion(navController)
+        }
+        composable(Py.route) {
+            VistaPythonCurso(navController)
         }
     }
-
-
 }

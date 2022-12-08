@@ -23,8 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    //NavigationHost()
-                    VistaQuestion()
+                    NavigationHost()
                 }
             }
         }

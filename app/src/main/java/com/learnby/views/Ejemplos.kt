@@ -30,7 +30,7 @@ fun CircularProgressBar(
     strokeWidth: Dp = 8.dp,
     animDuration: Int = 1000,
     animDelay: Int = 0
-){
+) {
     var animationPlayed by remember {
         mutableStateOf(false)
     }
@@ -43,7 +43,7 @@ fun CircularProgressBar(
 
     )
 
-    LaunchedEffect(key1 = true){
+    LaunchedEffect(key1 = true) {
         animationPlayed = true
     }
 
@@ -61,7 +61,7 @@ fun CircularProgressBar(
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
         }
-        
+
         Text(
             text = (curPecentage.value * number).toInt().toString() + "%",
             color = androidx.compose.ui.graphics.Color.Black,
@@ -73,20 +73,21 @@ fun CircularProgressBar(
 }
 
 @Composable
-fun animated(){
+fun animated() {
     var expanded by remember {
         mutableStateOf(false)
     }
-    
+
     Column {
-        Button(onClick = { expanded = !expanded}) {
+        Button(onClick = { expanded = !expanded }) {
             Text(text = if (expanded) "Shrink" else "expanded")
         }
         Spacer(modifier = Modifier.height(16.dp))
-        
-        Box(modifier = Modifier.background(Color.LightGray)){
-            Text(text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-            fontSize = 16.sp,
+
+        Box(modifier = Modifier.background(Color.LightGray)) {
+            Text(
+                text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                fontSize = 16.sp,
                 textAlign = TextAlign.Justify,
                 modifier = Modifier.padding(16.dp),
                 maxLines = if (expanded) Int.MAX_VALUE else 2
@@ -102,14 +103,14 @@ fun MyButtonExample() {
 
     Button(
         onClick = { selected = !selected },
-        colors= ButtonDefaults.buttonColors(backgroundColor = color)
-    ){
+        colors = ButtonDefaults.buttonColors(backgroundColor = color)
+    ) {
         Text("Button")
     }
 }
 
 @Preview
 @Composable
-fun Preview(){
+fun Preview() {
     animated()
 }

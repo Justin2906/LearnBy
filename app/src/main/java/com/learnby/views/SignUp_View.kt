@@ -27,26 +27,33 @@ fun SignUpPage() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         val username = remember { mutableStateOf(TextFieldValue()) }
         val password = remember { mutableStateOf(TextFieldValue()) }
         val email = remember { mutableStateOf(TextFieldValue()) }
 
-        Text(text = "Sign Up", style = TextStyle(fontSize = 40.sp))
+        Text(
+            text = "Sign Up",
+            style = TextStyle(fontSize = 40.sp)
+        )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
         TextField(
             label = { Text(text = "Username") },
             value = username.value,
             onValueChange = { username.value = it })
 
         Spacer(modifier = Modifier.height(20.dp))
+
         TextField(
-            label = { Text(text = "Email")},
+            label = { Text(text = "Email") },
             value = email.value,
-            onValueChange = {email.value = it})
+            onValueChange = { email.value = it })
 
         Spacer(modifier = Modifier.height(20.dp))
+
         TextField(
             label = { Text(text = "Password") },
             value = password.value,
@@ -55,6 +62,7 @@ fun SignUpPage() {
             onValueChange = { password.value = it })
 
         Spacer(modifier = Modifier.height(20.dp))
+
         Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
             Button(
                 onClick = { },
