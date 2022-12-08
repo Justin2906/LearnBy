@@ -163,7 +163,7 @@ fun DrawerQues(
                 .height(15.dp)
         )
         menu_items.forEach{item ->
-            DrawerItem(item = item){
+            DrawerItemQues(item = item){
                 navController.navigate(item.ruta){
                     launchSingleTop = true
                 }
