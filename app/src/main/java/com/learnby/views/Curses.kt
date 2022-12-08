@@ -1,6 +1,10 @@
 package com.learnby.views
 
+
 import android.text.style.BackgroundColorSpan
+
+import androidx.annotation.DrawableRes
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.draw.clip
@@ -27,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -62,6 +67,19 @@ val cursosList = listOf(
         listOf("Declaracion de variables",
             "Uso Condicionales",
             "Uso de bucles")
+        R.drawable.pythoncurso, tittle = "Curso Basico Python",
+        listOf("Declaracion de variables",
+            "Uso Condicionales",
+            "Uso de bucles"
+        )
+    ),
+    Cursos(
+        R.drawable.java,
+        tittle = "Curso Basico Java",
+        listOf("Declaracion de variables",
+            "Uso Condicionales", "Uso de bucles")
+
+
     ),
     Cursos(
         R.drawable.java_script1,
@@ -69,6 +87,11 @@ val cursosList = listOf(
         listOf("Declaracion de variables",
             "Uso Condicionales", "Uso de bucles")
     )
+
+            "Uso Condicionales",
+            "Uso de bucles")
+    ),
+
 )
 
 @Composable
@@ -250,6 +273,7 @@ fun DrawerItem(item: Routes_menu,
 ){
     Row (
         modifier = Modifier
+
             .fillMaxWidth()
             .height(56.dp)
             .padding(6.dp)
@@ -262,6 +286,11 @@ fun DrawerItem(item: Routes_menu,
             contentDescription = item.title)
         Spacer(modifier = Modifier.width(12.dp))
 
+            .background(Color(0xFF272928))
+            .padding(top = 16.dp)
+
+    ) {
+        Text(text = "Cursos Disponibles", style = typography.h5, color = Color.White, modifier = Modifier.align(Alignment.CenterHorizontally)
         Text(text = item.title,
             style = MaterialTheme.typography.body1,
         )
@@ -290,6 +319,12 @@ fun CursesCard(cursos: Cursos){
         Column(
             modifier = Modifier
                 .padding(16.dp)
+
+        Surface(
+            shape = RoundedCornerShape(8.dp),
+            elevation = 8.dp,
+            modifier = Modifier.padding(8.dp)
+
         ) {
             val imageModifier = Modifier
                 .height(150.dp)
@@ -328,9 +363,13 @@ fun CursesCard(cursos: Cursos){
 
 @Composable
 fun CursesList(cursosList: List<Cursos>){
+ 
     LazyColumn(modifier = Modifier
         .background(Color(0xFF212338))
     ){
+
+    LazyColumn(modifier = Modifier.padding(top = 70.dp)){
+ 
         items(cursosList){curso ->
             CursesCard(curso)
         }
