@@ -11,10 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.learnby.navigation.NavigationHost
 import com.learnby.ui.theme.LearnByTheme
-import com.learnby.views.VistaCursos
-import com.learnby.views.VistaQuestion
-
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
