@@ -1,16 +1,10 @@
 package com.learnby.views
 
-
-import android.text.style.BackgroundColorSpan
-
-import androidx.annotation.DrawableRes
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
@@ -31,7 +25,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -43,56 +36,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import com.learnby.model.Cursos
+import com.learnby.model.cursosList
 
-data class Cursos(
-    @DrawableRes val imageResource: Int,
-    val tittle: String,
-    val description: List<String>
-)
-
-val cursosList = listOf(
-    Cursos(
-        R.drawable.pythoncurso,
-        tittle = "Curso Basico Python",
-        listOf("Declaracion de variables",
-            "Uso Condicionales", "Uso de bucles")
-    ),
-    Cursos
-        (R.drawable.java,
-        tittle = "Curso Basico Java",
-        listOf("Declaracion de variables",
-            "Uso Condicionales",
-            "Uso de bucles")
-        R.drawable.pythoncurso, tittle = "Curso Basico Python",
-        listOf("Declaracion de variables",
-            "Uso Condicionales",
-            "Uso de bucles"
-        )
-    ),
-    Cursos(
-        R.drawable.java,
-        tittle = "Curso Basico Java",
-        listOf("Declaracion de variables",
-            "Uso Condicionales", "Uso de bucles")
-
-
-    ),
-    Cursos(
-        R.drawable.java_script1,
-        tittle = "Curso Basico JavaScript",
-        listOf("Declaracion de variables",
-            "Uso Condicionales", "Uso de bucles")
-    )
-
-            "Uso Condicionales",
-            "Uso de bucles")
-    ),
-
-)
 
 @Composable
 fun VistaCursos() {
@@ -104,9 +53,6 @@ fun VistaCursos() {
         Routes_menu.Pantalla_confi,
         Routes_menu.Cerrar_sesion
     )
-
-
-
     Scaffold(
         scaffoldState = scaffoldState,
         topBar ={TopBar(scope,scaffoldState)},
@@ -117,7 +63,7 @@ fun VistaCursos() {
             menu_items = navigationItems)},
 
     ){
-        Cursos()
+
     }
 
 }
@@ -173,8 +119,6 @@ fun CircularProgressBar1(
     }
 
 }
-
-
 
 @Composable
 fun TopBar(
@@ -281,17 +225,16 @@ fun DrawerItem(item: Routes_menu,
             .padding(8.dp)
             .clickable { onItemClick(item) },
     ){
-        Image(painterResource(id = item.icon),
+        Image(painterResource(
+            id = item.icon),
             modifier = Modifier.size(30.dp),
             contentDescription = item.title)
-        Spacer(modifier = Modifier.width(12.dp))
-
+        Spacer(modifier = Modifier.width(12.dp)
             .background(Color(0xFF272928))
             .padding(top = 16.dp)
-
-    ) {
-        Text(text = "Cursos Disponibles", style = typography.h5, color = Color.White, modifier = Modifier.align(Alignment.CenterHorizontally)
-        Text(text = item.title,
+        )
+        Text(
+            text = item.title,
             style = MaterialTheme.typography.body1,
         )
     }
@@ -319,12 +262,6 @@ fun CursesCard(cursos: Cursos){
         Column(
             modifier = Modifier
                 .padding(16.dp)
-
-        Surface(
-            shape = RoundedCornerShape(8.dp),
-            elevation = 8.dp,
-            modifier = Modifier.padding(8.dp)
-
         ) {
             val imageModifier = Modifier
                 .height(150.dp)
@@ -363,13 +300,11 @@ fun CursesCard(cursos: Cursos){
 
 @Composable
 fun CursesList(cursosList: List<Cursos>){
- 
-    LazyColumn(modifier = Modifier
-        .background(Color(0xFF212338))
+    LazyColumn(
+        modifier = Modifier
+            .padding(top = 70.dp)
+            .background(Color(0xFF212338))
     ){
-
-    LazyColumn(modifier = Modifier.padding(top = 70.dp)){
- 
         items(cursosList){curso ->
             CursesCard(curso)
         }

@@ -1,11 +1,6 @@
 package com.learnby.views
 
 
-import android.os.Bundle
-import android.service.autofill.OnClickAction
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,15 +14,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -52,11 +44,13 @@ fun VistaQuestion() {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar ={TopBarQues(scope,scaffoldState)},
-        drawerContent = {DrawerQues(
+        drawerContent = {
+            DrawerQues(
             scope,
             scaffoldState,
             navController,
-            menu_items = navigationItems)},
+            menu_items = navigationItems)
+        },
 
         ){
         QuestionView()
@@ -64,11 +58,6 @@ fun VistaQuestion() {
 
 }
 
-data class Preguntas(
-    @DrawableRes val imageResource: Int,
-    val Pregunta: String,
-    val Respuestas: List<String>
-)
 
 @Composable
 fun TopBarQues(
@@ -82,11 +71,13 @@ fun TopBarQues(
         backgroundColor = Color(0xFF373960),
         title = { Text(text = "LearnBy", color = Color.White)},
         navigationIcon = {
-            IconButton(onClick = {
+            IconButton(
+                onClick = {
                 scope.launch {
                     scaffoldState.drawerState.open()
                 }
-            }) {
+            }
+            ) {
                 Icon(imageVector = Icons.Filled.Menu,
                     contentDescription =  "Icono de menu",
                     tint = Color.White)
@@ -94,50 +85,44 @@ fun TopBarQues(
         },
         actions = {
             IconButton(onClick = { /*TODO*/ }) {
-                Icon(imageVector = Icons.Filled.Refresh,
+                Icon(
+                    imageVector = Icons.Filled.Refresh,
                     contentDescription = "Boton refrescar",
-                    tint = Color.White)
+                    tint = Color.White
+                )
 
             }
             IconButton(onClick = { showMenu = !showMenu }) {
-                Icon(imageVector = Icons.Filled.MoreVert,
+                Icon(
+                    imageVector = Icons.Filled.MoreVert,
                     contentDescription = "Mas opciones",
-                    tint = Color.White)
+                    tint = Color.White
+                )
 
             }
-            DropdownMenu(expanded = showMenu,
-                onDismissRequest = { showMenu= false },
+            DropdownMenu(
+                expanded = showMenu,
+                onDismissRequest = { showMenu = false },
                 modifier = Modifier.width(150.dp)
             ) {
                 DropdownMenuItem(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Filled.Person,
-                        contentDescription = "Idiomas")
+                    Icon(
+                        imageVector = Icons.Filled.Person,
+                        contentDescription = "Idiomas"
+                    )
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(text = "Idiomas")
                 }
                 DropdownMenuItem(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Filled.Share,
-                        contentDescription = "Compartir")
+                    Icon(
+                        imageVector = Icons.Filled.Share,
+                        contentDescription = "Compartir"
+                    )
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(text = "Compartir")
-
-/*
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            LearnByTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    VistaQuestion()
-
                 }
             }
-
-        }
+        },
     )
 }
 
@@ -163,23 +148,22 @@ fun DrawerQues(
                 .height(15.dp)
         )
         menu_items.forEach{item ->
-            DrawerItem(item = item){
+            DrawerItemQues(item = item){
                 navController.navigate(item.ruta){
                     launchSingleTop = true
                 }
                 scope.launch {
                     scaffoldState.drawerState.close()
                 }
-
             }
         }
     }
 }
-*/
-@Composable
 
-fun DrawerItemQues(item: Routes_menu,
-               onItemClick: (Routes_menu) -> Unit
+@Composable
+fun  DrawerItemQues(
+    item: Routes_menu,
+    onItemClick: (Routes_menu) -> Unit
 ){
     Row (
         modifier = Modifier
@@ -190,35 +174,31 @@ fun DrawerItemQues(item: Routes_menu,
             .padding(8.dp)
             .clickable { onItemClick(item) },
     ){
-        Image(painterResource(id = item.icon),
-            modifier = Modifier.size(30.dp),
-            contentDescription = item.title)
+        Image(
+            painterResource(
+                id = item.icon),
+                modifier = Modifier.size(30.dp),
+                contentDescription = item.title
+        )
         Spacer(modifier = Modifier.width(12.dp))
-
-        Text(text = item.title,
+        Text(
+            text = item.title,
             style = MaterialTheme.typography.body1,
         )
     }
 }
 @Composable
 fun QuestionView() {
-
-fun VistaQuestion() {
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
             .background(
-
                 Color(0xFF212338)
             ),
-
-                Color(0xFF272928)),
-
         horizontalAlignment = Alignment.CenterHorizontally
 
-    ) {
+    ){
         Column(
             modifier = Modifier
                 .padding(20.dp)
@@ -233,12 +213,6 @@ fun VistaQuestion() {
                 fontWeight = FontWeight.ExtraBold,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
                     .padding(bottom = 16.dp)
-            )
-
-                fontSize = 30.sp,
-                color = Color.White,
-                fontWeight = FontWeight.ExtraBold,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
             )
             Row(
                 modifier = Modifier
@@ -319,20 +293,14 @@ fun VistaQuestion() {
                     modifier = Modifier
                         .size(260.dp)
                         .padding(10.dp)
-
                         .clickable { },
-
-                        .clickable {  },
-
                 )
-
                 Text(
                     text = "Aqui aparecera la pregunta",
                     color = Color.White,
                     textAlign = TextAlign.Center,
                     fontSize = 36.sp,
                     modifier = Modifier.padding(bottom = 10.dp)
-
                 )
             }
 
@@ -351,7 +319,10 @@ fun VistaQuestion() {
                         .padding(bottom = 10.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF373960))
                 ) {
-                    Text(text = "Opcion A",fontSize = 20.sp,color = Color.White)
+                    Text(text = "Opcion A",
+                        fontSize = 20.sp,
+                        color = Color.White
+                    )
                 }
 
                 Button(
@@ -363,7 +334,10 @@ fun VistaQuestion() {
                         .padding(bottom = 10.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF373960))
                 ) {
-                    Text(text = "Opcion A",fontSize = 20.sp,color = Color.White)
+                    Text(text = "Opcion A",
+                        fontSize = 20.sp,
+                        color = Color.White
+                    )
                 }
 
                 Button(
@@ -375,7 +349,11 @@ fun VistaQuestion() {
                         .padding(bottom = 10.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF373960))
                 ) {
-                    Text(text = "Opcion A",fontSize = 20.sp,color = Color.White)
+                    Text(
+                        text = "Opcion A",
+                        fontSize = 20.sp,
+                        color = Color.White
+                    )
                 }
 
                 Button(
@@ -387,7 +365,11 @@ fun VistaQuestion() {
                         .padding(bottom = 10.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF373960))
                 ) {
-                    Text(text = "Opcion D", fontSize = 20.sp, color =  Color.White, textAlign = TextAlign.Center)
+                    Text(text = "Opcion D",
+                        fontSize = 20.sp,
+                        color =  Color.White,
+                        textAlign = TextAlign.Center
+                    )
                 }
             }
 
@@ -406,32 +388,37 @@ fun VistaQuestion() {
                     modifier = Modifier.padding(top = 54.dp),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Button(onClick = { /*TODO*/ }, shape = RoundedCornerShape(14.dp)) {
-                        Text(text = "Opcion C", fontSize = 20.sp)
+                    Button(
+                        onClick = { /*TODO*/ },
+                        shape = RoundedCornerShape(14.dp)
+                    ) {
+                        Text(
+                            text = "Opcion C",
+                            fontSize = 20.sp
+                        )
                     }
 
                     Spacer(modifier = Modifier.width(40.dp))
-
-                    Button(onClick = { /*TODO*/ }, shape = RoundedCornerShape(14.dp)) {
-                        Text(text = "Opcion D", fontSize = 20.sp)
+                    Button(
+                        onClick = { /*TODO*/ },
+                        shape = RoundedCornerShape(14.dp)
+                    ) {
+                        Text(
+                            text = "Opcion D",
+                            fontSize = 20.sp
+                        )
                     }
                 }
 
             }
         }
     }
-
-}
-
-
-@Preview
+@Preview()
 @Composable
 fun TaskCompletedPreview() {
-    LearnByTheme {
+    LearnByTheme() {
         Surface {
             VistaQuestion()
         }
     }
 }
-
-
