@@ -28,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.learnby.R
 import com.learnby.navigation.Routes_menu
@@ -42,6 +41,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import com.learnby.navigation.NavigationHost
+import com.learnby.navigation.Routes
+import androidx.navigation.NavHostController as NavigationNavHostController
 
 data class Cursos(
     @DrawableRes val imageResource: Int,
@@ -81,8 +83,6 @@ fun VistaCursos() {
         Routes_menu.Pantalla_confi,
         Routes_menu.Cerrar_sesion
     )
-
-
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -214,7 +214,7 @@ fun TopBar(
 fun Drawer(
     scope: CoroutineScope,
     scaffoldState: ScaffoldState,
-    navController: NavHostController,
+    navController: NavigationNavHostController,
     menu_items: List<Routes_menu>
 ){
     Column {
@@ -324,10 +324,13 @@ fun CursesCard(cursos: Cursos){
             }
 
             Button(
-                onClick = { /*TODO*/},
+                onClick = {},
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF525058)),
-                modifier = Modifier.align(Alignment.CenterHorizontally).fillMaxWidth()
-                    .height(40.dp).padding(top = 5.dp)
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth()
+                    .height(40.dp)
+                    .padding(top = 5.dp)
             ) {
                 Text(
                     text = "Iniciar Curso",
