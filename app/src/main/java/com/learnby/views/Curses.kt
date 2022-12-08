@@ -322,6 +322,19 @@ fun CursesCard(cursos: Cursos){
                     color = Color.White
                 )
             }
+            
+            Button(
+                onClick = { /*TODO*/},
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF525058)),
+                modifier = Modifier.align(Alignment.CenterHorizontally).fillMaxWidth()
+                    .height(40.dp).padding(top = 5.dp)
+            ) {
+                Text(
+                    text = "Iniciar Curso",
+                    color = Color.White
+
+                )
+            }
         }
     }
 }
