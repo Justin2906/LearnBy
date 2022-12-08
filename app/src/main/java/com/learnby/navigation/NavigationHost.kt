@@ -8,7 +8,8 @@ import com.learnby.navigation.Routes.*
 import com.learnby.views.CursesList
 import com.learnby.views.LoginPage
 import com.learnby.views.SignUpPage
-import com.learnby.views.cursosList
+import com.learnby.model.cursosList
+import com.learnby.views.VistaCursos
 
 
 @Composable
@@ -31,7 +32,7 @@ fun NavigationHost() {
 
         }
         composable(Curses.route) {
-            CursesList(cursosList = cursosList)
+            VistaCursos()
         }
     }
 
