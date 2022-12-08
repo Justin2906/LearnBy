@@ -1,6 +1,5 @@
 package com.learnby.views
 
-
 import android.os.Bundle
 import android.service.autofill.OnClickAction
 import androidx.activity.ComponentActivity
@@ -23,7 +22,6 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,7 +35,6 @@ import com.learnby.navigation.Routes_menu
 import com.learnby.ui.theme.LearnByTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-
 
 @Composable
 fun VistaQuestion() {
@@ -120,20 +117,6 @@ fun TopBarQues(
                         contentDescription = "Compartir")
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(text = "Compartir")
-
-/*
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            LearnByTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    VistaQuestion()
-
                 }
             }
 
@@ -163,7 +146,7 @@ fun DrawerQues(
                 .height(15.dp)
         )
         menu_items.forEach{item ->
-            DrawerItem(item = item){
+            DrawerItemQues(item = item){
                 navController.navigate(item.ruta){
                     launchSingleTop = true
                 }
@@ -175,11 +158,9 @@ fun DrawerQues(
         }
     }
 }
-*/
 @Composable
-
 fun DrawerItemQues(item: Routes_menu,
-               onItemClick: (Routes_menu) -> Unit
+                   onItemClick: (Routes_menu) -> Unit
 ){
     Row (
         modifier = Modifier
@@ -202,20 +183,13 @@ fun DrawerItemQues(item: Routes_menu,
 }
 @Composable
 fun QuestionView() {
-
-fun VistaQuestion() {
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
             .background(
-
                 Color(0xFF212338)
             ),
-
-                Color(0xFF272928)),
-
         horizontalAlignment = Alignment.CenterHorizontally
 
     ) {
@@ -227,7 +201,6 @@ fun VistaQuestion() {
         ) {
             Text(
                 text = "Python Quiz",
-
                 fontSize = 20.sp,
                 color = Color.White,
                 fontWeight = FontWeight.ExtraBold,
@@ -235,82 +208,11 @@ fun VistaQuestion() {
                     .padding(bottom = 16.dp)
             )
 
-                fontSize = 30.sp,
-                color = Color.White,
-                fontWeight = FontWeight.ExtraBold,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
-            Row(
-                modifier = Modifier
-                    .padding(15.dp)
-                    .align(Alignment.CenterHorizontally)
-            ) {
-                Button(
-                    onClick = { /*TODO*/ },
-                    modifier= Modifier
-                        .size(50.dp),  //avoid the oval shape
-                    shape = CircleShape,
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(
-                        0xFF4CAF50
-                    )
-                    )
-                ) {
-                    Text(
-                        text = "5 ",
-                        fontSize = 25.sp,
-                        textAlign = TextAlign.Justify
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(5.dp))
-
-                Text(
-                    text = "Aciertos",
-                    fontSize = 20.sp,
-                    color = Color.White,
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                )
-
-                Spacer(modifier = Modifier.width(20.dp))
-
-                Text(
-                    text = "Fallos",
-                    fontSize = 20.sp,
-                    color = Color.White,
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                )
-
-                Spacer(modifier = Modifier.width(5.dp))
-
-                Button(
-                    onClick = { /*TODO*/ },
-                    modifier= Modifier
-                        .size(50.dp),  //avoid the oval shape
-                    shape = CircleShape,
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(
-                        0xFFF44336
-                    )
-                    )
-                ) {
-                    Text(
-                        text = "3 ",
-                        fontSize = 25.sp
-                    )
-
-                }
-            }
-
-
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-
                     .padding(top = 5.dp, bottom = 25.dp)
                     .background(Color(0xFF373960), shape = RoundedCornerShape(10.dp))
-
-                    .padding(bottom = 40.dp)
-                    .background(Color.White, shape = RoundedCornerShape(10.dp))
-
             ) {
                 val image = painterResource(com.example.learnby.R.drawable.logopython)
                 Image(
@@ -319,11 +221,7 @@ fun VistaQuestion() {
                     modifier = Modifier
                         .size(260.dp)
                         .padding(10.dp)
-
                         .clickable { },
-
-                        .clickable {  },
-
                 )
 
                 Text(
@@ -331,8 +229,7 @@ fun VistaQuestion() {
                     color = Color.White,
                     textAlign = TextAlign.Center,
                     fontSize = 36.sp,
-                    modifier = Modifier.padding(bottom = 10.dp)
-
+                    modifier = Modifier.padding(bottom = 5.dp)
                 )
             }
 
@@ -341,7 +238,6 @@ fun VistaQuestion() {
                     .padding(top = 5.dp)
                     .align(Alignment.CenterHorizontally)
             ) {
- 
                 Button(
                     onClick = { },
                     shape = RoundedCornerShape(50.dp),
@@ -391,43 +287,19 @@ fun VistaQuestion() {
                 }
             }
 
-                Row {
-                    Button(onClick = { /*TODO*/ }, shape = RoundedCornerShape(14.dp)) {
-                        Text(text = "Opcion A", fontSize = 20.sp)
-                    }
 
-                    Spacer(modifier = Modifier.width(40.dp))
 
-                    Button(onClick = { /*TODO*/ }, shape = RoundedCornerShape(14.dp)) {
-                        Text(text = "Opcion B", fontSize = 20.sp)
-                    }
-                }
-                Row(
-                    modifier = Modifier.padding(top = 54.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Button(onClick = { /*TODO*/ }, shape = RoundedCornerShape(14.dp)) {
-                        Text(text = "Opcion C", fontSize = 20.sp)
-                    }
 
-                    Spacer(modifier = Modifier.width(40.dp))
-
-                    Button(onClick = { /*TODO*/ }, shape = RoundedCornerShape(14.dp)) {
-                        Text(text = "Opcion D", fontSize = 20.sp)
-                    }
-                }
-
-            }
         }
     }
 
 }
 
 
-@Preview
+@Preview()
 @Composable
 fun TaskCompletedPreview() {
-    LearnByTheme {
+    LearnByTheme() {
         Surface {
             VistaQuestion()
         }
