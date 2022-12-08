@@ -18,10 +18,11 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.learnby.ui.theme.LearnByTheme
 
 @Composable
-fun SignUp(/*navController: NavHostController*/) {
+fun SignUpPage() {
     Column(
         modifier = Modifier.padding(20.dp),
         verticalArrangement = Arrangement.Center,
@@ -68,11 +69,11 @@ fun SignUp(/*navController: NavHostController*/) {
         }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     LearnByTheme {
-        SignUp()
-    }
 
+    }
 }
