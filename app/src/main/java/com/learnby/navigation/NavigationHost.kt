@@ -5,10 +5,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.learnby.navigation.Routes.*
-import com.learnby.views.CursesList
 import com.learnby.views.LoginPage
 import com.learnby.views.SignUpPage
-import com.learnby.model.cursosList
 import com.learnby.views.VistaCursos
 
 
@@ -33,6 +31,9 @@ fun NavigationHost() {
         }
         composable(Curses.route) {
             VistaCursos()
+        }
+        composable(Routes_menu.Cerrar_sesion.ruta){
+            SignUpPage()
         }
     }
 
