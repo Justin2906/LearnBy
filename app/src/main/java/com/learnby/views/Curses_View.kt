@@ -1,10 +1,12 @@
 package com.learnby.views
 
+import android.text.style.BackgroundColorSpan
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
@@ -36,12 +38,38 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
-import com.learnby.model.Cursos
-import com.learnby.model.cursosList
 
+data class Cursos(
+    @DrawableRes val imageResource: Int,
+    val tittle: String,
+    val description: List<String>
+)
+
+val cursosList = listOf(
+    Cursos(
+        R.drawable.pythoncurso,
+        tittle = "Curso Basico Python",
+        listOf("Declaracion de variables",
+            "Uso Condicionales", "Uso de bucles")
+    ),
+    Cursos
+        (R.drawable.java,
+        tittle = "Curso Basico Java",
+        listOf("Declaracion de variables",
+            "Uso Condicionales",
+            "Uso de bucles")
+    ),
+    Cursos(
+        R.drawable.java_script1,
+        tittle = "Curso Basico JavaScript",
+        listOf("Declaracion de variables",
+            "Uso Condicionales", "Uso de bucles")
+    )
+)
 
 @Composable
 fun VistaCursos() {
@@ -53,6 +81,9 @@ fun VistaCursos() {
         Routes_menu.Pantalla_confi,
         Routes_menu.Cerrar_sesion
     )
+
+
+
     Scaffold(
         scaffoldState = scaffoldState,
         topBar ={TopBar(scope,scaffoldState)},
@@ -62,8 +93,8 @@ fun VistaCursos() {
             navController,
             menu_items = navigationItems)},
 
-    ){
-
+        ){
+        Cursos()
     }
 
 }
@@ -120,6 +151,8 @@ fun CircularProgressBar1(
 
 }
 
+
+
 @Composable
 fun TopBar(
     scope: CoroutineScope,
@@ -139,20 +172,20 @@ fun TopBar(
             }) {
                 Icon(imageVector = Icons.Filled.Menu,
                     contentDescription =  "Icono de menu",
-                tint = Color.White)
+                    tint = Color.White)
             }
         },
         actions = {
             IconButton(onClick = { /*TODO*/ }) {
                 Icon(imageVector = Icons.Filled.Refresh,
                     contentDescription = "Boton refrescar",
-                tint = Color.White)
+                    tint = Color.White)
 
             }
             IconButton(onClick = { showMenu = !showMenu }) {
                 Icon(imageVector = Icons.Filled.MoreVert,
                     contentDescription = "Mas opciones",
-                tint = Color.White)
+                    tint = Color.White)
 
             }
             DropdownMenu(expanded = showMenu,
@@ -217,7 +250,6 @@ fun DrawerItem(item: Routes_menu,
 ){
     Row (
         modifier = Modifier
-
             .fillMaxWidth()
             .height(56.dp)
             .padding(6.dp)
@@ -225,16 +257,12 @@ fun DrawerItem(item: Routes_menu,
             .padding(8.dp)
             .clickable { onItemClick(item) },
     ){
-        Image(painterResource(
-            id = item.icon),
+        Image(painterResource(id = item.icon),
             modifier = Modifier.size(30.dp),
             contentDescription = item.title)
-        Spacer(modifier = Modifier.width(12.dp)
-            .background(Color(0xFF272928))
-            .padding(top = 16.dp)
-        )
-        Text(
-            text = item.title,
+        Spacer(modifier = Modifier.width(12.dp))
+
+        Text(text = item.title,
             style = MaterialTheme.typography.body1,
         )
     }
@@ -294,16 +322,27 @@ fun CursesCard(cursos: Cursos){
                     color = Color.White
                 )
             }
+
+            Button(
+                onClick = { /*TODO*/},
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF525058)),
+                modifier = Modifier.align(Alignment.CenterHorizontally).fillMaxWidth()
+                    .height(40.dp).padding(top = 5.dp)
+            ) {
+                Text(
+                    text = "Iniciar Curso",
+                    color = Color.White
+
+                )
+            }
         }
     }
 }
 
 @Composable
 fun CursesList(cursosList: List<Cursos>){
-    LazyColumn(
-        modifier = Modifier
-            .padding(top = 70.dp)
-            .background(Color(0xFF212338))
+    LazyColumn(modifier = Modifier
+        .background(Color(0xFF212338))
     ){
         items(cursosList){curso ->
             CursesCard(curso)
