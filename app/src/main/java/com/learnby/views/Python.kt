@@ -308,7 +308,6 @@ fun CircularProgressBarPy(
         }
 
         Text(
-            color = Color.White,
             text = (curPecentage.value * number).toInt().toString() + "%",
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
