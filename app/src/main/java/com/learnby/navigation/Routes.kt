@@ -8,9 +8,9 @@ sealed class Routes(
     val title : String,
 
     ) {
-    object Login : Routes("login", R.drawable.cerrar_sesion,"Login")
+    object Login : Routes("login", R.drawable.cerrar_sesion,"Log Out")
     object SignUp : Routes("signUp", R.drawable.perfil,"SignUp")
     object Curses : Routes("curses", R.drawable.perfil,"Curses")
     object Ques : Routes("ques", R.drawable.perfil,"Quiz")
-    object Py : Routes("py", R.drawable.perfil,"Python")
+    object Py : Routes("py", R.drawable.configuracion,"Python")
 }

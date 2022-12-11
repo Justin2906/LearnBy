@@ -40,13 +40,12 @@ fun VistaQuestion(navController: NavController) {
     val scope = rememberCoroutineScope()
     val navigationItems = listOf(
         Routes.Login
-
         )
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar = { TopBarQues(scope, scaffoldState) },
+        topBar = { TopBar(scope, scaffoldState) },
         drawerContent = {
-            DrawerQues(
+            Drawer(
                 scope,
                 scaffoldState,
                 navController,
@@ -60,73 +59,6 @@ fun VistaQuestion(navController: NavController) {
 
 }
 
-@Composable
-fun TopBarQues(
-    scope: CoroutineScope,
-    scaffoldState: ScaffoldState
-) {
-    var showMenu by remember {
-        mutableStateOf(value = false)
-    }
-    TopAppBar(
-        backgroundColor = Color(0xFF373960),
-        title = { Text(text = "LearnBy", color = Color.White) },
-        navigationIcon = {
-            IconButton(onClick = {
-                scope.launch {
-                    scaffoldState.drawerState.open()
-                }
-            }) {
-                Icon(
-                    imageVector = Icons.Filled.Menu,
-                    contentDescription = "Icono de menu",
-                    tint = Color.White
-                )
-            }
-        },
-        actions = {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    imageVector = Icons.Filled.Refresh,
-                    contentDescription = "Boton refrescar",
-                    tint = Color.White
-                )
-
-            }
-            IconButton(onClick = { showMenu = !showMenu }) {
-                Icon(
-                    imageVector = Icons.Filled.MoreVert,
-                    contentDescription = "Mas opciones",
-                    tint = Color.White
-                )
-
-            }
-            DropdownMenu(
-                expanded = showMenu,
-                onDismissRequest = { showMenu = false },
-                modifier = Modifier.width(150.dp)
-            ) {
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
-                    Icon(
-                        imageVector = Icons.Filled.Person,
-                        contentDescription = "Idiomas"
-                    )
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Text(text = "Idiomas")
-                }
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
-                    Icon(
-                        imageVector = Icons.Filled.Share,
-                        contentDescription = "Compartir"
-                    )
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Text(text = "Compartir")
-                }
-            }
-
-        }
-    )
-}
 
 @Composable
 fun DrawerQues(
