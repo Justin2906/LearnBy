@@ -10,7 +10,6 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -20,45 +19,39 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.learnby.R
-import com.learnby.model.Questions
-import com.learnby.navigation.Routes_menu
+import com.learnby.model.Preguntas
+import com.learnby.model.preguntasList
+import com.learnby.navigation.Routes
 import com.learnby.ui.theme.LearnByTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.selects.select
-import kotlin.math.absoluteValue
 
 @Composable
-fun VistaQuestion() {
-    val navController = rememberNavController()
+fun VistaQuestion(navController: NavController) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val navigationItems = listOf(
-        Routes_menu.Pantalla_Perfil,
-        Routes_menu.Pantalla_confi,
-        Routes_menu.Cerrar_sesion
-    )
+        Routes.Login
+        )
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar ={TopBarQues(scope,scaffoldState)},
-        drawerContent = {DrawerQues(
-            scope,
-            scaffoldState,
-            navController,
-            menu_items = navigationItems)},
+        topBar = { TopBar(scope, scaffoldState) },
+        drawerContent = {
+            Drawer(
+                scope,
+                scaffoldState,
+                navController,
+                menu_items = navigationItems
+            )
+        },
 
         ){
         QuestionsView()
@@ -66,70 +59,14 @@ fun VistaQuestion() {
 
 }
 
-@Composable
-fun TopBarQues(
-    scope: CoroutineScope,
-    scaffoldState: ScaffoldState
-){
-    var showMenu by remember{
-        mutableStateOf(value = false)
-    }
-    TopAppBar (
-        backgroundColor = Color(0xFF373960),
-        title = { Text(text = "LearnBy", color = Color.White)},
-        navigationIcon = {
-            IconButton(onClick = {
-                scope.launch {
-                    scaffoldState.drawerState.open()
-                }
-            }) {
-                Icon(imageVector = Icons.Filled.Menu,
-                    contentDescription =  "Icono de menu",
-                    tint = Color.White)
-            }
-        },
-        actions = {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(imageVector = Icons.Filled.Refresh,
-                    contentDescription = "Boton refrescar",
-                    tint = Color.White)
-
-            }
-            IconButton(onClick = { showMenu = !showMenu }) {
-                Icon(imageVector = Icons.Filled.MoreVert,
-                    contentDescription = "Mas opciones",
-                    tint = Color.White)
-
-            }
-            DropdownMenu(expanded = showMenu,
-                onDismissRequest = { showMenu= false },
-                modifier = Modifier.width(150.dp)
-            ) {
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Filled.Person,
-                        contentDescription = "Idiomas")
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Text(text = "Idiomas")
-                }
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Filled.Share,
-                        contentDescription = "Compartir")
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Text(text = "Compartir")
-                }
-            }
-
-        }
-    )
-}
 
 @Composable
 fun DrawerQues(
     scope: CoroutineScope,
     scaffoldState: ScaffoldState,
-    navController: NavHostController,
-    menu_items: List<Routes_menu>
-){
+    navController: NavController,
+    menu_items: List<Routes.Login>
+) {
     Column {
         Image(
             painterResource(id = R.drawable.encabezado_menu),
@@ -144,9 +81,9 @@ fun DrawerQues(
                 .fillMaxWidth()
                 .height(15.dp)
         )
-        menu_items.forEach{item ->
-            DrawerItemQues(item = item){
-                navController.navigate(item.ruta){
+        menu_items.forEach { item ->
+            DrawerItemQues(item = item) {
+                navController.navigate(item.route){
                     launchSingleTop = true
                 }
                 scope.launch {
@@ -159,10 +96,11 @@ fun DrawerQues(
 }
 
 @Composable
-fun DrawerItemQues(item: Routes_menu,
-                   onItemClick: (Routes_menu) -> Unit
-){
-    Row (
+fun DrawerItemQues(
+    item: Routes,
+    onItemClick: (Routes) -> Unit
+) {
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(56.dp)
@@ -170,13 +108,16 @@ fun DrawerItemQues(item: Routes_menu,
             .clip(RoundedCornerShape(percent = 12))
             .padding(8.dp)
             .clickable { onItemClick(item) },
-    ){
-        Image(painterResource(id = item.icon),
+    ) {
+        Image(
+            painterResource(id = item.icon),
             modifier = Modifier.size(30.dp),
-            contentDescription = item.title)
+            contentDescription = item.title
+        )
         Spacer(modifier = Modifier.width(12.dp))
 
-        Text(text = item.title,
+        Text(
+            text = item.title,
             style = MaterialTheme.typography.body1,
         )
     }
@@ -215,7 +156,6 @@ fun QuestionsView(){
         PreguntasCard5()
     }
 }
-
 
 @Composable
 fun PreguntasCard1(){
@@ -256,7 +196,10 @@ fun PreguntasCard1(){
                 color = Color.White
             )
 
-            Button(onClick = {selected = !selected},
+
+
+            Button(
+                onClick = { },
                 colors = ButtonDefaults.buttonColors(backgroundColor = color2),
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -614,7 +557,7 @@ fun PreguntasCard5() {
 fun TaskCompletedPreview() {
     LearnByTheme() {
         Surface {
-            VistaQuestion()
+            VistaQuestion(navController = rememberNavController())
         }
     }
 }
