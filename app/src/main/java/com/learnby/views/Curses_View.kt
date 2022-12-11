@@ -158,7 +158,7 @@ fun CursesCard(cursos: Cursos, navController: NavController
 
             Button(
                 onClick = { navController.navigate(Routes.Py.route)},
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF525058)),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .fillMaxWidth()
@@ -167,7 +167,7 @@ fun CursesCard(cursos: Cursos, navController: NavController
             ) {
                 Text(
                     text = "Iniciar Curso",
-                    color = Color.White
+                    color = Color.Black
                 )
             }
         }

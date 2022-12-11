@@ -157,7 +157,6 @@ fun QuestionsView(){
     }
 }
 
-
 @Composable
 fun PreguntasCard1(){
     val image = painterResource(R.drawable.logopython)
@@ -197,7 +196,10 @@ fun PreguntasCard1(){
                 color = Color.White
             )
 
-            Button(onClick = {selected = !selected},
+
+
+            Button(
+                onClick = { },
                 colors = ButtonDefaults.buttonColors(backgroundColor = color2),
                 modifier = Modifier
                     .fillMaxWidth(),
