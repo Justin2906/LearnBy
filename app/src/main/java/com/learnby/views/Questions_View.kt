@@ -6,9 +6,7 @@ import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -63,7 +61,7 @@ fun VistaQuestion() {
             menu_items = navigationItems)},
 
         ){
-        Question()
+        QuestionsView()
     }
 
 }
@@ -184,40 +182,14 @@ fun DrawerItemQues(item: Routes_menu,
     }
 }
 
-data class Preguntas(
-    @DrawableRes val imageResource: Int,
-    val Question: String,
-    val Answer1: String,
-    val Answer2: String,
-    val Answer3: String,
-    val AnswerCorrect: String
-)
-
-val preguntasList = listOf(
-    Preguntas(R.drawable.pregunta1py,
-        Question = "¿Cual es el error Aqui?",
-        Answer1 ="Declaracion de variables",
-        Answer2 = "Uso Condicionales",
-        Answer3 = "Uso de bucles",
-        "Uso de bucles"
-    ),
-    Preguntas(R.drawable.pregunta1py,
-        Question = "Curso Basico Java",
-        Answer1 ="Declaracion de variables",
-        Answer2 = "Uso Condicionales",
-        Answer3 = "Uso de bucles",
-        "Uso de bucles"
-    )
-)
-
-
 @Composable
-fun Question(){
+fun QuestionsView(){
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
             .background(Color(0xFF212338))
+            .verticalScroll(rememberScrollState())
     ){
         Column(
             modifier = Modifier
@@ -236,27 +208,22 @@ fun Question(){
                 color = Color.White
             )
         }
-
-        Column {
-            preguntasList(preguntasList = preguntasList)
-        }
+        PreguntasCard1()
+        PreguntasCard2()
+        PreguntasCard3()
+        PreguntasCard4()
+        PreguntasCard5()
     }
-
 }
 
+
 @Composable
-fun PreguntasCard(preguntas: Preguntas){
-    val image = painterResource(preguntas.imageResource)
-
-    var enabled by remember { mutableStateOf(true)}
-
-    var counter = rememberSaveable { mutableStateOf(100) }
+fun PreguntasCard1(){
+    val image = painterResource(R.drawable.logopython)
 
     var selected by remember { mutableStateOf(false) }
-
-    var restar = if (selected) counter.value -=20 else counter.value= counter.value
-
-    val color = if (enabled) Color.White else Color.Green
+    val color = if (selected) Color.Green else Color.White
+    val color2 = if (selected) Color.Red else Color.White
 
     Surface(
         modifier = Modifier
@@ -265,7 +232,85 @@ fun PreguntasCard(preguntas: Preguntas){
         elevation = 8.dp,
         color = Color(0xFF373960)
     ) {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+        ) {
+            val imageModifier = Modifier
+                .height(150.dp)
+                .size(150.dp)
+                .clip(shape = RoundedCornerShape(8.dp))
+                .align(Alignment.CenterHorizontally)
 
+            Image(
+                painter = image,
+                contentDescription = null,
+                modifier = imageModifier,
+                contentScale = ContentScale.Crop
+            )
+            Text(
+                text = "¿Cuál de las siguientes opciones es una variable de tipo Float?",
+                style = MaterialTheme.typography.h5,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally),
+                color = Color.White
+            )
+
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
+                modifier = Modifier
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "'8.2'",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color),
+                modifier = Modifier
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "10.4",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "5",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun PreguntasCard2() {
+    val image = painterResource(R.drawable.mostrarporpantalla)
+
+    var selected by remember { mutableStateOf(false) }
+    val color = if (selected) Color.Green else Color.White
+    val color2 = if (selected) Color.Red else Color.White
+
+    Surface(
+        modifier = Modifier
+            .padding(8.dp),
+        shape = RoundedCornerShape(8.dp),
+        elevation = 8.dp,
+        color = Color(0xFF373960)
+    ) {
         Column(
             modifier = Modifier
                 .padding(16.dp)
@@ -282,65 +327,284 @@ fun PreguntasCard(preguntas: Preguntas){
                 contentScale = ContentScale.Crop
             )
             Text(
-                text = preguntas.Question,
+                text = "¿Qué se muestra por pantalla?",
                 style = MaterialTheme.typography.h5,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally),
                 color = Color.White
             )
-            Button(onClick = {enabled = !enabled},
+            Button(onClick = {selected = !selected},
                 colors = ButtonDefaults.buttonColors(backgroundColor = color),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .fillMaxWidth(),
-                enabled = enabled
             ) {
                 Text(
-                    text = preguntas.Answer1,
+                    text = "20",
                     style = MaterialTheme.typography.body2,
                     color = Color.Black
                 )
             }
 
-            Button(onClick = {enabled = !enabled},
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
                 modifier = Modifier
                     .fillMaxWidth(),
-                enabled = enabled
             ) {
                 Text(
-                    text = preguntas.Answer2,
+                    text = "Tu edad es: 20",
                     style = MaterialTheme.typography.body2,
                     color = Color.Black
                 )
             }
 
-            Button(onClick = {enabled = !enabled},
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .fillMaxWidth(),
-                enabled = enabled
             ) {
                 Text(
-                    text = preguntas.Answer3,
+                    text = "edad",
                     style = MaterialTheme.typography.body2,
                     color = Color.Black
                 )
             }
-
-
         }
     }
 }
 
 @Composable
-fun preguntasList(preguntasList: List<Preguntas>){
-    LazyColumn(modifier = Modifier
-        .background(Color(0xFF212338))
-    ){
-        items(preguntasList){pregunta ->
-            PreguntasCard(pregunta)
+fun PreguntasCard3() {
+    val image = painterResource(R.drawable.suma)
+
+    var selected by remember { mutableStateOf(false) }
+    val color = if (selected) Color.Green else Color.White
+    val color2 = if (selected) Color.Red else Color.White
+
+    Surface(
+        modifier = Modifier
+            .padding(8.dp),
+        shape = RoundedCornerShape(8.dp),
+        elevation = 8.dp,
+        color = Color(0xFF373960)
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+        ) {
+            val imageModifier = Modifier
+                .height(150.dp)
+                .fillMaxWidth()
+                .clip(shape = RoundedCornerShape(8.dp))
+
+            Image(
+                painter = image,
+                contentDescription = null,
+                modifier = imageModifier,
+                contentScale = ContentScale.Crop
+            )
+            Text(
+                text = "¿Qué se muestra por pantalla?",
+                style = MaterialTheme.typography.h5,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally),
+                color = Color.White
+            )
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "7",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
+                modifier = Modifier
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "12",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color),
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "\"Resultado\"",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun PreguntasCard4() {
+    val image = painterResource(R.drawable.mayorque)
+
+    var selected by remember { mutableStateOf(false) }
+    val color = if (selected) Color.Green else Color.White
+    val color2 = if (selected) Color.Red else Color.White
+
+    Surface(
+        modifier = Modifier
+            .padding(8.dp),
+        shape = RoundedCornerShape(8.dp),
+        elevation = 8.dp,
+        color = Color(0xFF373960)
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+        ) {
+            val imageModifier = Modifier
+                .height(150.dp)
+                .fillMaxWidth()
+                .clip(shape = RoundedCornerShape(8.dp))
+
+            Image(
+                painter = image,
+                contentDescription = null,
+                modifier = imageModifier,
+                contentScale = ContentScale.Crop
+            )
+            Text(
+                text = "¿Qué se muestra por pantalla?",
+                style = MaterialTheme.typography.h5,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally),
+                color = Color.White
+            )
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color),
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "\"Es mayor\"",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
+                modifier = Modifier
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "Es mayor",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "No es mayor",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun PreguntasCard5() {
+    val image = painterResource(R.drawable.logopython)
+
+    var selected by remember { mutableStateOf(false) }
+    val color = if (selected) Color.Green else Color.White
+    val color2 = if (selected) Color.Red else Color.White
+
+    Surface(
+        modifier = Modifier
+            .padding(8.dp),
+        shape = RoundedCornerShape(8.dp),
+        elevation = 8.dp,
+        color = Color(0xFF373960)
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+        ) {
+            val imageModifier = Modifier
+                .height(150.dp)
+                .size(150.dp)
+                .clip(shape = RoundedCornerShape(8.dp))
+                .align(Alignment.CenterHorizontally)
+
+            Image(
+                painter = image,
+                contentDescription = null,
+                modifier = imageModifier,
+                contentScale = ContentScale.Crop
+            )
+            Text(
+                text = "¿Qué devuelve el metodo len()?",
+                style = MaterialTheme.typography.h5,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally),
+                color = Color.White
+            )
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "La palabra separada por espacios",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
+                modifier = Modifier
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "nada",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+
+            Button(onClick = {selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color),
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "devuelve la longitud de un objeto",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
         }
     }
 }

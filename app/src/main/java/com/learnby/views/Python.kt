@@ -3,10 +3,7 @@ package com.learnby.views
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -372,7 +369,6 @@ fun CircularProgressBarPy(
         }
 
         Text(
-            color = Color.White,
             text = (curPecentage.value * number).toInt().toString() + "%",
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
