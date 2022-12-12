@@ -86,7 +86,7 @@ fun SignUpPage() {
 
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun DefaultPreview() {
     LearnByTheme {

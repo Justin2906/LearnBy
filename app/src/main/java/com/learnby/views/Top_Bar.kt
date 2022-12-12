@@ -20,9 +20,9 @@ import com.learnby.navigation.Routes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-/*
+
 @Composable
-fun TopBarView(navController: NavController){
+fun TopBarView(navController: NavController, view_page :Unit){
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val navigationItems = listOf(
@@ -45,7 +45,7 @@ fun TopBarView(navController: NavController){
     }
 
 }
-*/
+
 @Composable
 fun TopBar(
     scope: CoroutineScope,

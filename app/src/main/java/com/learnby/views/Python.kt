@@ -34,25 +34,9 @@ import com.learnby.navigation.Routes
 
 @Composable
 fun VistaPythonCurso(navController: NavController) {
-    val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-    val navigationItems = listOf(
-        Routes.Login
-    )
-    Scaffold(
-        scaffoldState = scaffoldState,
-        topBar = { TopBar(scope, scaffoldState) },
-        drawerContent = {
-            Drawer(
-                scope,
-                scaffoldState,
-                navController,
-                menu_items = navigationItems
-            )
-        },
-    ) {
-        CursoPython(navController)
-    }
+    TopBarView(navController = navController, view_page = CursoPython(navController))
+
+
 }
 
 @Composable
@@ -156,7 +140,7 @@ fun CursoPython(navController: NavController) {
 }
 
 @Composable
-fun CircularProgressBarPy(
+fun CircularProgressBar(
     percentage: Float,
     number: Int,
     fontSize: TextUnit = 28.sp,

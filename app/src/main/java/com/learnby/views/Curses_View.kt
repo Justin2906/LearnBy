@@ -27,78 +27,9 @@ import com.learnby.ui.theme.LearnByTheme
 
 @Composable
 fun VistaCursos(navController: NavController) {
-    val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-    val navigationItems = listOf(
-        Routes.Login
-    )
-    Scaffold(
-        scaffoldState = scaffoldState,
-        topBar = { TopBar(scope, scaffoldState) },
-        drawerContent = {
-            Drawer(
-                scope,
-                scaffoldState,
-                navController,
-                menu_items = navigationItems
-            )
-        },
-    ) {
-        Cursos(navController = navController)
-    }
+    TopBarView(navController = navController, view_page = Cursos(navController = navController))
+
 }
-/*
-@Composable
-fun CircularProgressBar1(
-    percentage: Float,
-    number: Int,
-    fontSize: TextUnit = 28.sp,
-    radius: Dp = 50.dp,
-    color: Color = Color.Green,
-    strokeWidth: Dp = 8.dp,
-    animDuration: Int = 1000,
-    animDelay: Int = 0
-){
-    var animationPlayed by remember {
-        mutableStateOf(false)
-    }
-    val curPecentage = animateFloatAsState(
-        targetValue = if (animationPlayed) percentage else 0f,
-        animationSpec = tween(
-            durationMillis = animDuration,
-            delayMillis = animDelay
-        )
-
-    )
-
-    LaunchedEffect(key1 = true){
-        animationPlayed = true
-    }
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .size(radius * 2f),
-    ) {
-        Canvas(modifier = Modifier.size(radius * 2f)) {
-            drawArc(
-                color = color,
-                -90f,
-                360 * curPecentage.value,
-                useCenter = false,
-                style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
-            )
-        }
-
-        Text(
-            text = (curPecentage.value * number).toInt().toString() + "%",
-            color = Color.Black,
-            fontSize = fontSize,
-            fontWeight = FontWeight.Bold
-        )
-    }
-}
-*/
 
 @Composable
 fun Cursos(navController: NavController){

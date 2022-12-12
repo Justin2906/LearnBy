@@ -1,21 +1,13 @@
 package com.learnby.views
 
-import android.os.Bundle
-import android.service.autofill.OnClickAction
-import android.widget.Button
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,100 +19,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.learnby.R
-import com.learnby.model.Preguntas
-import com.learnby.model.preguntasList
-import com.learnby.navigation.Routes
 import com.learnby.ui.theme.LearnByTheme
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 @Composable
 fun VistaQuestion(navController: NavController) {
-    val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-    val navigationItems = listOf(
-        Routes.Login
-        )
-    Scaffold(
-        scaffoldState = scaffoldState,
-        topBar = { TopBar(scope, scaffoldState) },
-        drawerContent = {
-            Drawer(
-                scope,
-                scaffoldState,
-                navController,
-                menu_items = navigationItems
-            )
-        },
-
-        ){
-        QuestionsView()
-    }
-
-}
-
-
-@Composable
-fun DrawerQues(
-    scope: CoroutineScope,
-    scaffoldState: ScaffoldState,
-    navController: NavController,
-    menu_items: List<Routes.Login>
-) {
-    Column {
-        Image(
-            painterResource(id = R.drawable.encabezado_menu),
-            contentDescription = "Menu",
-            modifier = Modifier
-                .height(160.dp)
-                .fillMaxWidth(),
-            contentScale = ContentScale.Crop
-        )
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(15.dp)
-        )
-        menu_items.forEach { item ->
-            DrawerItemQues(item = item) {
-                navController.navigate(item.route){
-                    launchSingleTop = true
-                }
-                scope.launch {
-                    scaffoldState.drawerState.close()
-                }
-
-            }
-        }
-    }
-}
-
-@Composable
-fun DrawerItemQues(
-    item: Routes,
-    onItemClick: (Routes) -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp)
-            .padding(6.dp)
-            .clip(RoundedCornerShape(percent = 12))
-            .padding(8.dp)
-            .clickable { onItemClick(item) },
-    ) {
-        Image(
-            painterResource(id = item.icon),
-            modifier = Modifier.size(30.dp),
-            contentDescription = item.title
-        )
-        Spacer(modifier = Modifier.width(12.dp))
-
-        Text(
-            text = item.title,
-            style = MaterialTheme.typography.body1,
-        )
-    }
+    TopBarView(navController = navController, view_page = QuestionsView())
 }
 
 @Composable

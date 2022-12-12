@@ -23,7 +23,6 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.learnby.ui.theme.Purple700
 
 @Composable
 fun LoginPage(
@@ -98,6 +97,5 @@ Column(modifier = Modifier.background(Color(0xFF212338))){
         )
     }
 }
-
 }
 
