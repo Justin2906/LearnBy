@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.learnby.R
+import com.learnby.model.Contador
 import com.learnby.model.Preguntas
 import com.learnby.model.preguntasList
 import com.learnby.navigation.Routes
@@ -199,7 +200,7 @@ fun PreguntasCard1(){
 
 
             Button(
-                onClick = { },
+                onClick = {selected = !selected},
                 colors = ButtonDefaults.buttonColors(backgroundColor = color2),
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -211,7 +212,10 @@ fun PreguntasCard1(){
                 )
             }
 
-            Button(onClick = {selected = !selected},
+            Button(onClick = {
+                selected = !selected
+                Contador.puntos += 0.2f
+                             },
                 colors = ButtonDefaults.buttonColors(backgroundColor = color),
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -223,7 +227,9 @@ fun PreguntasCard1(){
                 )
             }
 
-            Button(onClick = {selected = !selected},
+            Button(onClick = {
+                selected = !selected
+                             },
                 colors = ButtonDefaults.buttonColors(backgroundColor = color2),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)

@@ -23,6 +23,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
+import com.learnby.model.Contador
+import kotlin.math.absoluteValue
 
 //Ejemplo de Progress Bar
 @Composable
@@ -101,13 +103,15 @@ fun animated() {
     }
 }
 
+
+
 @Composable
 fun MyButtonExample() {
     var selected by remember { mutableStateOf(false) }
     val color = if (selected) Color.Blue else Color.Yellow
 
     Button(
-        onClick = { selected = !selected },
+        onClick = {},
         colors = ButtonDefaults.buttonColors(backgroundColor = color)
     ) {
         Text("Button")
@@ -117,5 +121,5 @@ fun MyButtonExample() {
 @Preview
 @Composable
 fun Preview() {
-    animated()
+    CircularProgressBar(percentage = Contador.puntos.absoluteValue, number = 100)
 }

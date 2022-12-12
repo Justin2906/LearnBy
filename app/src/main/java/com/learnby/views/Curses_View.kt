@@ -42,9 +42,9 @@ fun VistaCursos(navController: NavController) {
                 navController,
                 menu_items = navigationItems
             )
-        },
+        }
     ) {
-        Cursos(navController = navController)
+        com.learnby.views.Cursos(navController = navController)
     }
 }
 /*
@@ -125,9 +125,9 @@ fun CursesCard(cursos: Cursos, navController: NavController
                 .padding(16.dp)
         ) {
             val imageModifier = Modifier
-                .height(150.dp)
-                .fillMaxWidth()
-                .clip(shape = RoundedCornerShape(8.dp))
+                    .height(150.dp)
+                    .fillMaxWidth()
+                    .clip(shape = RoundedCornerShape(8.dp))
 
             Image(
                 painter = image,
@@ -160,10 +160,10 @@ fun CursesCard(cursos: Cursos, navController: NavController
                 onClick = { navController.navigate(Routes.Py.route)},
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .fillMaxWidth()
-                    .height(40.dp)
-                    .padding(top = 5.dp)
+                        .align(Alignment.CenterHorizontally)
+                        .fillMaxWidth()
+                        .height(40.dp)
+                        .padding(top = 5.dp)
             ) {
                 Text(
                     text = "Iniciar Curso",
