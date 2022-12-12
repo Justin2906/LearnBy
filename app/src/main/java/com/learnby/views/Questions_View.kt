@@ -28,8 +28,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.learnby.R
 import com.learnby.model.Contador
-import com.learnby.model.Preguntas
-import com.learnby.model.preguntasList
 import com.learnby.navigation.Routes
 import com.learnby.ui.theme.LearnByTheme
 import kotlinx.coroutines.CoroutineScope
@@ -160,12 +158,12 @@ fun QuestionsView(){
 
 @Composable
 fun PreguntasCard1(){
-    val image = painterResource(R.drawable.logopython)
-
     var selected by remember { mutableStateOf(false) }
+
     val color = if (selected) Color.Green else Color.White
     val color2 = if (selected) Color.Red else Color.White
-
+    
+    val image = painterResource(R.drawable.logopython)
     Surface(
         modifier = Modifier
             .padding(8.dp),
@@ -200,7 +198,8 @@ fun PreguntasCard1(){
 
 
             Button(
-                onClick = {selected = !selected},
+                onClick = {
+                    selected = !selected},
                 colors = ButtonDefaults.buttonColors(backgroundColor = color2),
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -282,7 +281,9 @@ fun PreguntasCard2() {
                     .align(Alignment.CenterHorizontally),
                 color = Color.White
             )
-            Button(onClick = {selected = !selected},
+            Button(onClick = {
+                selected = !selected
+                Contador.puntos += 0.2f},
                 colors = ButtonDefaults.buttonColors(backgroundColor = color),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -385,7 +386,9 @@ fun PreguntasCard3() {
                 )
             }
 
-            Button(onClick = {selected = !selected},
+            Button(onClick = {
+                selected = !selected
+                Contador.puntos += 0.2f},
                 colors = ButtonDefaults.buttonColors(backgroundColor = color),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -439,7 +442,7 @@ fun PreguntasCard4() {
                 color = Color.White
             )
             Button(onClick = {selected = !selected},
-                colors = ButtonDefaults.buttonColors(backgroundColor = color),
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .fillMaxWidth(),
@@ -463,14 +466,16 @@ fun PreguntasCard4() {
                 )
             }
 
-            Button(onClick = {selected = !selected},
-                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
+            Button(onClick = {
+                selected = !selected
+                Contador.puntos += 0.2f},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .fillMaxWidth(),
             ) {
                 Text(
-                    text = "No es mayor",
+                    text = "\"No es mayor\"",
                     style = MaterialTheme.typography.body2,
                     color = Color.Black
                 )
@@ -484,6 +489,7 @@ fun PreguntasCard5() {
     val image = painterResource(R.drawable.logopython)
 
     var selected by remember { mutableStateOf(false) }
+
     val color = if (selected) Color.Green else Color.White
     val color2 = if (selected) Color.Red else Color.White
 
@@ -542,7 +548,10 @@ fun PreguntasCard5() {
                 )
             }
 
-            Button(onClick = {selected = !selected},
+            Button(onClick = {
+                selected = !selected
+                Contador.puntos += 0.2f
+                             },
                 colors = ButtonDefaults.buttonColors(backgroundColor = color),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
