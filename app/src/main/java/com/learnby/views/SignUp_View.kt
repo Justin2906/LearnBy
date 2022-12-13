@@ -1,5 +1,6 @@
 package com.learnby.views
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -11,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -22,59 +24,66 @@ import com.learnby.ui.theme.LearnByTheme
 
 @Composable
 fun SignUpPage() {
-    Column(
-        modifier = Modifier.padding(20.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        val username = remember { mutableStateOf(TextFieldValue()) }
-        val password = remember { mutableStateOf(TextFieldValue()) }
-        val email = remember { mutableStateOf(TextFieldValue()) }
+    Column(modifier = Modifier
+        .background(Color(0xFF212338))
+        .fillMaxWidth()
+        .fillMaxHeight()) {
+        Column(
+            modifier = Modifier.padding(20.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            val username = remember { mutableStateOf(TextFieldValue()) }
+            val password = remember { mutableStateOf(TextFieldValue()) }
+            val email = remember { mutableStateOf(TextFieldValue()) }
 
-        Text(
-            text = "Sign Up",
-            style = TextStyle(fontSize = 40.sp)
-        )
+            Text(
+                text = "Sign Up",
+                style = TextStyle(fontSize = 40.sp),
+                color = Color.White
+            )
 
-        Spacer(
-            modifier = Modifier
-                .height(20.dp)
-        )
-        TextField(
-            label = { Text(text = "Username") },
-            value = username.value,
-            onValueChange = { username.value = it })
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        TextField(
-            label = { Text(text = "Email") },
-            value = email.value,
-            onValueChange = { email.value = it })
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        TextField(
-            label = { Text(text = "Password") },
-            value = password.value,
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            onValueChange = { password.value = it })
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
-            Button(
-                onClick = { },
-                shape = RoundedCornerShape(50.dp),
+            Spacer(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
-            ) {
-                Text(text = "Sign Up")
+                    .height(20.dp)
+            )
+            TextField(
+                label = { Text(text = "Username", color = Color.White) },
+                value = username.value,
+                onValueChange = { username.value = it })
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            TextField(
+                label = { Text(text = "Email", color = Color.White) },
+                value = email.value,
+                onValueChange = { email.value = it })
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            TextField(
+                label = { Text(text = "Password", color = Color.White) },
+                value = password.value,
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                onValueChange = { password.value = it })
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                Button(
+                    onClick = { },
+                    shape = RoundedCornerShape(50.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp)
+                ) {
+                    Text(text = "Sign Up")
+                }
             }
         }
     }
+
 }
 
 @Preview(showBackground = true)

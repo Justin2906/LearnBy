@@ -44,3 +44,4 @@ val cursosList = listOf(
         )
     )
 )
+
