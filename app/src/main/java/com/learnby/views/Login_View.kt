@@ -274,4 +274,3 @@ fun AndroidLogo(
 
     }
 }
-}

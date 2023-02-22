@@ -27,8 +27,25 @@ import com.learnby.ui.theme.LearnByTheme
 
 @Composable
 fun VistaCursos(navController: NavController) {
-    TopBarView(navController = navController, view_page = Cursos(navController = navController))
-
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+    val navigationItems = listOf(
+        Routes.Login
+    )
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar = { TopBar(scope, scaffoldState) },
+        drawerContent = {
+            Drawer(
+                scope,
+                scaffoldState,
+                navController,
+                menu_items = navigationItems
+            )
+        }
+    ) {
+        com.learnby.views.Cursos(navController = navController)
+    }
 }
 
 @Composable
@@ -56,9 +73,9 @@ fun CursesCard(cursos: Cursos, navController: NavController
                 .padding(16.dp)
         ) {
             val imageModifier = Modifier
-                .height(150.dp)
-                .fillMaxWidth()
-                .clip(shape = RoundedCornerShape(8.dp))
+                    .height(150.dp)
+                    .fillMaxWidth()
+                    .clip(shape = RoundedCornerShape(8.dp))
 
             Image(
                 painter = image,
@@ -91,10 +108,10 @@ fun CursesCard(cursos: Cursos, navController: NavController
                 onClick = { navController.navigate(Routes.Py.route)},
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .fillMaxWidth()
-                    .height(40.dp)
-                    .padding(top = 5.dp)
+                        .align(Alignment.CenterHorizontally)
+                        .fillMaxWidth()
+                        .height(40.dp)
+                        .padding(top = 5.dp)
             ) {
                 Text(
                     text = "Iniciar Curso",

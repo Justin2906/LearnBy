@@ -19,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.learnby.R
+import com.learnby.model.Contador
+import com.learnby.navigation.Routes
 import com.learnby.ui.theme.LearnByTheme
 
 @Composable
@@ -27,7 +29,70 @@ fun VistaQuestion(navController: NavController) {
 }
 
 @Composable
-fun QuestionsView(){
+fun DrawerQues(
+    scope: CoroutineScope,
+    scaffoldState: ScaffoldState,
+    navController: NavController,
+    menu_items: List<Routes.Login>
+) {
+    Column {
+        Image(
+            painterResource(id = R.drawable.encabezado_menu),
+            contentDescription = "Menu",
+            modifier = Modifier
+                .height(160.dp)
+                .fillMaxWidth(),
+            contentScale = ContentScale.Crop
+        )
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(15.dp)
+        )
+        menu_items.forEach { item ->
+            DrawerItemQues(item = item) {
+                navController.navigate(item.route){
+                    launchSingleTop = true
+                }
+                scope.launch {
+                    scaffoldState.drawerState.close()
+                }
+
+            }
+        }
+    }
+}
+
+@Composable
+fun DrawerItemQues(
+    item: Routes,
+    onItemClick: (Routes) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(56.dp)
+            .padding(6.dp)
+            .clip(RoundedCornerShape(percent = 12))
+            .padding(8.dp)
+            .clickable { onItemClick(item) },
+    ) {
+        /*Image(
+            painterResource(id = item.icon),
+            modifier = Modifier.size(30.dp),
+            contentDescription = item.title
+        )*/
+        Spacer(modifier = Modifier.width(12.dp))
+
+        Text(
+            text = "",
+            style = MaterialTheme.typography.body1,
+        )
+    }
+}
+
+@Composable
+fun Question() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -60,6 +125,93 @@ fun QuestionsView(){
     }
 }
 
+@Composable
+fun PreguntasCard1(){
+    var selected by remember { mutableStateOf(false) }
+
+    val color = if (selected) Color.Green else Color.White
+    val color2 = if (selected) Color.Red else Color.White
+    
+    val image = painterResource(R.drawable.logopython)
+    Surface(
+        modifier = Modifier
+            .padding(8.dp),
+        shape = RoundedCornerShape(8.dp),
+        elevation = 8.dp,
+        color = Color(0xFF373960)
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+        ) {
+            val imageModifier = Modifier
+                .height(150.dp)
+                .size(150.dp)
+                .clip(shape = RoundedCornerShape(8.dp))
+                .align(Alignment.CenterHorizontally)
+
+            Image(
+                painter = image,
+                contentDescription = null,
+                modifier = imageModifier,
+                contentScale = ContentScale.Crop
+            )
+            Text(
+                text = "¿Cuál de las siguientes opciones es una variable de tipo Float?",
+                style = MaterialTheme.typography.h5,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally),
+                color = Color.White
+            )
+
+
+
+            Button(
+                onClick = {
+                    selected = !selected},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
+                modifier = Modifier
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "'8.2'",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+
+            Button(onClick = {
+                selected = !selected
+                Contador.puntos += 0.2f
+                             },
+                colors = ButtonDefaults.buttonColors(backgroundColor = color),
+                modifier = Modifier
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "10.4",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+
+            Button(onClick = {
+                selected = !selected
+                             },
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth(),
+            ) {
+                Text(
+                    text = "5",
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Black
+                )
+            }
+        }
+    }
+}
 
 @Composable
 fun PreguntasCard2() {
@@ -98,7 +250,9 @@ fun PreguntasCard2() {
                     .align(Alignment.CenterHorizontally),
                 color = Color.White
             )
-            Button(onClick = {selected = !selected},
+            Button(onClick = {
+                selected = !selected
+                Contador.puntos += 0.2f},
                 colors = ButtonDefaults.buttonColors(backgroundColor = color),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -221,7 +375,9 @@ fun DrawerItemQues(
                 )
             }
 
-            Button(onClick = {selected = !selected},
+            Button(onClick = {
+                selected = !selected
+                Contador.puntos += 0.2f},
                 colors = ButtonDefaults.buttonColors(backgroundColor = color),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -275,7 +431,7 @@ fun PreguntasCard4() {
                 color = Color.White
             )
             Button(onClick = {selected = !selected},
-                colors = ButtonDefaults.buttonColors(backgroundColor = color),
+                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .fillMaxWidth(),
@@ -299,14 +455,16 @@ fun PreguntasCard4() {
                 )
             }
 
-            Button(onClick = {selected = !selected},
-                colors = ButtonDefaults.buttonColors(backgroundColor = color2),
+            Button(onClick = {
+                selected = !selected
+                Contador.puntos += 0.2f},
+                colors = ButtonDefaults.buttonColors(backgroundColor = color),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .fillMaxWidth(),
             ) {
                 Text(
-                    text = "No es mayor",
+                    text = "\"No es mayor\"",
                     style = MaterialTheme.typography.body2,
                     color = Color.Black
                 )
@@ -320,6 +478,7 @@ fun PreguntasCard5() {
     val image = painterResource(R.drawable.logopython)
 
     var selected by remember { mutableStateOf(false) }
+
     val color = if (selected) Color.Green else Color.White
     val color2 = if (selected) Color.Red else Color.White
 
@@ -378,7 +537,10 @@ fun PreguntasCard5() {
                 )
             }
 
-            Button(onClick = {selected = !selected},
+            Button(onClick = {
+                selected = !selected
+                Contador.puntos += 0.2f
+                             },
                 colors = ButtonDefaults.buttonColors(backgroundColor = color),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
