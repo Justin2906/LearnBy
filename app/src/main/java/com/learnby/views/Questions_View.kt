@@ -221,12 +221,32 @@ fun PreguntasCard2() {
 }
 
 @Composable
-fun PreguntasCard3() {
-    val image = painterResource(R.drawable.suma)
+fun DrawerItemQues(
+    item: Routes,
+    onItemClick: (Routes) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(56.dp)
+            .padding(6.dp)
+            .clip(RoundedCornerShape(percent = 12))
+            .padding(8.dp)
+            .clickable { onItemClick(item) },
+    ) {
+        /*Image(
+            painterResource(id = item.icon),
+            modifier = Modifier.size(30.dp),
+            contentDescription = item.title
+        )*/
+        Spacer(modifier = Modifier.width(12.dp))
 
-    var selected by remember { mutableStateOf(false) }
-    val color = if (selected) Color.Green else Color.White
-    val color2 = if (selected) Color.Red else Color.White
+        Text(
+            text = "",
+            style = MaterialTheme.typography.body1,
+        )
+    }
+}
 
     Surface(
         modifier = Modifier
