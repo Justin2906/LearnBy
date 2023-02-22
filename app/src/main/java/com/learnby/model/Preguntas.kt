@@ -12,6 +12,7 @@ data class Preguntas(
     val AnswerCorrect: String
 )
 
+
 val preguntasList = listOf(
     Preguntas(
         R.drawable.pregunta1py,
