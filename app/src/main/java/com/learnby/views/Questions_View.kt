@@ -56,6 +56,69 @@ fun VistaQuestion(navController: NavController) {
 
 
 @Composable
+fun DrawerQues(
+    scope: CoroutineScope,
+    scaffoldState: ScaffoldState,
+    navController: NavController,
+    menu_items: List<Routes.Login>
+) {
+    Column {
+        Image(
+            painterResource(id = R.drawable.encabezado_menu),
+            contentDescription = "Menu",
+            modifier = Modifier
+                .height(160.dp)
+                .fillMaxWidth(),
+            contentScale = ContentScale.Crop
+        )
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(15.dp)
+        )
+        menu_items.forEach { item ->
+            DrawerItemQues(item = item) {
+                navController.navigate(item.route){
+                    launchSingleTop = true
+                }
+                scope.launch {
+                    scaffoldState.drawerState.close()
+                }
+
+            }
+        }
+    }
+}
+
+@Composable
+fun DrawerItemQues(
+    item: Routes,
+    onItemClick: (Routes) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(56.dp)
+            .padding(6.dp)
+            .clip(RoundedCornerShape(percent = 12))
+            .padding(8.dp)
+            .clickable { onItemClick(item) },
+    ) {
+        /*Image(
+            painterResource(id = item.icon),
+            modifier = Modifier.size(30.dp),
+            contentDescription = item.title
+        )*/
+        Spacer(modifier = Modifier.width(12.dp))
+
+        Text(
+            text = "",
+            style = MaterialTheme.typography.body1,
+        )
+    }
+}
+
+@Composable
 fun Question() {
     Column(
         modifier = Modifier
