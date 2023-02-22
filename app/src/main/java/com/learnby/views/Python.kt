@@ -129,7 +129,7 @@ fun CursoPython(navController: NavController) {
                     .align(Alignment.CenterHorizontally)
                     .padding(8.dp)
             ) {
-                CircularProgressBar(percentage = Contador.puntos, number = 100)
+                CircularProgressBarPy(percentage = Contador.puntos, number = 100)
             }
 
             Text(
@@ -203,7 +203,7 @@ fun CircularProgressBarPy(
             text = (curPecentage.value * number).toInt().toString() + "%",
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
-
+            color = Color.White
             )
     }
 
