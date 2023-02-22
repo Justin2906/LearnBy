@@ -142,7 +142,7 @@ fun CursoPython(navController: NavController) {
 }
 
 @Composable
-fun CircularProgressBar(
+fun CircularProgressBarPy(
     percentage: Float,
     number: Int,
     fontSize: TextUnit = 28.sp,
