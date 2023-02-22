@@ -163,7 +163,7 @@ fun DrawerItem(
             .padding(8.dp)
             .clickable { onItemClick(item) },
     ) {
-        Image(
+        /*Image(
             painterResource(id = item.icon),
             modifier = Modifier.size(30.dp),
             contentDescription = item.title
@@ -173,6 +173,6 @@ fun DrawerItem(
         Text(
             text = item.title,
             style = MaterialTheme.typography.body1,
-        )
+        )*/
     }
 }
