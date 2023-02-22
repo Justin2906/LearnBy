@@ -108,22 +108,22 @@ fun DrawerItemQues(
             .padding(8.dp)
             .clickable { onItemClick(item) },
     ) {
-        Image(
+        /*Image(
             painterResource(id = item.icon),
             modifier = Modifier.size(30.dp),
             contentDescription = item.title
-        )
+        )*/
         Spacer(modifier = Modifier.width(12.dp))
 
         Text(
-            text = item.title,
+            text = "",
             style = MaterialTheme.typography.body1,
         )
     }
 }
 
 @Composable
-fun QuestionsView(){
+fun Question() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
