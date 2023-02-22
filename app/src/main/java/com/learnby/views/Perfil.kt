@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
-@Composable
+/*@Composable
 fun Perfilnav(){
     Column() {
     }
-}
+}*/
