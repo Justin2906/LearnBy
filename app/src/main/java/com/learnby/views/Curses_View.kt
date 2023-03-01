@@ -42,63 +42,11 @@ fun VistaCursos(navController: NavController) {
                 navController,
                 menu_items = navigationItems
             )
-        },
-    ) {
-        Cursos(navController = navController)
-    }
-}
-/*
-@Composable
-fun CircularProgressBar1(
-    percentage: Float,
-    number: Int,
-    fontSize: TextUnit = 28.sp,
-    radius: Dp = 50.dp,
-    color: Color = Color.Green,
-    strokeWidth: Dp = 8.dp,
-    animDuration: Int = 1000,
-    animDelay: Int = 0
-){
-    var animationPlayed by remember {
-        mutableStateOf(false)
-    }
-    val curPecentage = animateFloatAsState(
-        targetValue = if (animationPlayed) percentage else 0f,
-        animationSpec = tween(
-            durationMillis = animDuration,
-            delayMillis = animDelay
-        )
-
-    )
-
-    LaunchedEffect(key1 = true){
-        animationPlayed = true
-    }
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .size(radius * 2f),
-    ) {
-        Canvas(modifier = Modifier.size(radius * 2f)) {
-            drawArc(
-                color = color,
-                -90f,
-                360 * curPecentage.value,
-                useCenter = false,
-                style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
-            )
         }
-
-        Text(
-            text = (curPecentage.value * number).toInt().toString() + "%",
-            color = Color.Black,
-            fontSize = fontSize,
-            fontWeight = FontWeight.Bold
-        )
+    ) {
+        com.learnby.views.Cursos(navController = navController)
     }
 }
-*/
 
 @Composable
 fun Cursos(navController: NavController){
@@ -125,9 +73,9 @@ fun CursesCard(cursos: Cursos, navController: NavController
                 .padding(16.dp)
         ) {
             val imageModifier = Modifier
-                .height(150.dp)
-                .fillMaxWidth()
-                .clip(shape = RoundedCornerShape(8.dp))
+                    .height(150.dp)
+                    .fillMaxWidth()
+                    .clip(shape = RoundedCornerShape(8.dp))
 
             Image(
                 painter = image,
@@ -158,16 +106,16 @@ fun CursesCard(cursos: Cursos, navController: NavController
 
             Button(
                 onClick = { navController.navigate(Routes.Py.route)},
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF525058)),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .fillMaxWidth()
-                    .height(40.dp)
-                    .padding(top = 5.dp)
+                        .align(Alignment.CenterHorizontally)
+                        .fillMaxWidth()
+                        .height(40.dp)
+                        .padding(top = 5.dp)
             ) {
                 Text(
                     text = "Iniciar Curso",
-                    color = Color.White
+                    color = Color.Black
                 )
             }
         }

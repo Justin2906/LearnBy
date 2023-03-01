@@ -20,9 +20,9 @@ import com.learnby.navigation.Routes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-/*
+
 @Composable
-fun TopBarView(navController: NavController){
+fun TopBarView(navController: NavController, view_page :Unit){
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val navigationItems = listOf(
@@ -45,7 +45,7 @@ fun TopBarView(navController: NavController){
     }
 
 }
-*/
+
 @Composable
 fun TopBar(
     scope: CoroutineScope,
@@ -156,23 +156,23 @@ fun DrawerItem(
 ) {
     Row(
         modifier = Modifier
-            .fillMaxWidth()
+            /*Image(
+                  painterResource(id = item.icon),
+                  modifier = Modifier.size(30.dp),
+                  contentDescription = item.title
+              )
+              Spacer(modifier = Modifier.width(12.dp))
+
+              Text(
+                  text = item.title,
+                  style = MaterialTheme.typography.body1,
+              )*/      .fillMaxWidth()
             .height(56.dp)
             .padding(6.dp)
             .clip(RoundedCornerShape(percent = 12))
             .padding(8.dp)
             .clickable { onItemClick(item) },
     ) {
-        /*Image(
-            painterResource(id = item.icon),
-            modifier = Modifier.size(30.dp),
-            contentDescription = item.title
-        )
-        Spacer(modifier = Modifier.width(12.dp))
 
-        Text(
-            text = item.title,
-            style = MaterialTheme.typography.body1,
-        )*/
     }
 }

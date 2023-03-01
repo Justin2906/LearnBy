@@ -27,32 +27,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.learnby.model.Contador
 import com.learnby.model.Python
 import com.learnby.model.pythonList
 import com.learnby.navigation.Routes
+import kotlin.math.absoluteValue
 
 
 @Composable
 fun VistaPythonCurso(navController: NavController) {
-    val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-    val navigationItems = listOf(
-        Routes.Login
-    )
-    Scaffold(
-        scaffoldState = scaffoldState,
-        topBar = { TopBar(scope, scaffoldState) },
-        drawerContent = {
-            Drawer(
-                scope,
-                scaffoldState,
-                navController,
-                menu_items = navigationItems
-            )
-        },
-    ) {
-        CursoPython(navController)
-    }
+    TopBarView(navController = navController, view_page = CursoPython(navController))
+
+
 }
 
 @Composable
@@ -127,11 +113,11 @@ fun CursoPython(navController: NavController) {
                     .align(Alignment.CenterHorizontally)
                     .padding(8.dp)
             ) {
-                CircularProgressBar(percentage = 0.7f, number = 100)
+                CircularProgressBarPy(percentage = Contador.puntos, number = 100)
             }
 
             Text(
-                text = "Progreso del Curso",
+                text = "Progreso del Curso Actual",
                 style = MaterialTheme.typography.h6,
                 color = Color.White,
                 modifier = Modifier
@@ -198,11 +184,10 @@ fun CircularProgressBarPy(
         }
 
         Text(
-            color = Color.White,
             text = (curPecentage.value * number).toInt().toString() + "%",
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
-
+            color = Color.White
             )
     }
 

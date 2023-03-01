@@ -36,7 +36,7 @@ fun VistaQuestion(navController: NavController) {
     val scope = rememberCoroutineScope()
     val navigationItems = listOf(
         Routes.Login
-        )
+    )
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = { TopBar(scope, scaffoldState) },
@@ -48,7 +48,7 @@ fun VistaQuestion(navController: NavController) {
                 menu_items = navigationItems
             )
         },
-        ) {
+    ) {
         Question()
     }
 
@@ -255,15 +255,3 @@ fun preguntasList(preguntasList: List<Preguntas>) {
         }
     }
 }
-
-@Preview()
-@Composable
-fun TaskCompletedPreview() {
-    LearnByTheme() {
-        Surface {
-            VistaQuestion(navController = rememberNavController())
-        }
-    }
-}
-
-
