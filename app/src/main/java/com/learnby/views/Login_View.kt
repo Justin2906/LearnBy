@@ -1,5 +1,6 @@
 package com.learnby.views
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
@@ -23,21 +24,16 @@ import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.learnby.navigation.Routes
-import com.learnby.ui.theme.Purple700
+import com.learnby.ui.theme.*
 import com.learnby.viewModel.LoginViewModel
 
 @Composable
@@ -50,11 +46,17 @@ fun LoginPage(
     Box(
         Modifier
             .fillMaxWidth()
-            .background(Color(0xFFE0E5F3))
-    ) {
+            .background(fondo200
+                /*brush = Brush.linearGradient(
+                    colors = listOf(White200, Red500)*/
+            )
+    )
+    {
 
         AndroidLogo(
-            backgroundColor = MaterialTheme.colors.background, contentColor = Color(0xFF5D61E6), padding = 40.dp
+            backgroundColor = MaterialTheme.colors.background,
+            contentColor = Android,
+            padding = 30.dp
         )
 
         Box(
@@ -74,11 +76,13 @@ fun LoginPage(
                         .constrainAs(surface) {
                             bottom.linkTo(parent.bottom)
                         },
-                    color = Color(0xFFA1BBE2),
+                    border = BorderStroke(5.dp, Color.White),
+                    color = surfaceColor,
                     shape = RoundedCornerShape(
                         topStartPercent = 8,
-                        topEndPercent = 8
-                    )
+                        topEndPercent = 8,
+
+                        )
                 ) {
                     Column(
                         modifier = Modifier
@@ -99,7 +103,7 @@ fun LoginPage(
 
                         TextField(
                             value = email,
-                            onValueChange = {LoginViewModel.onLoginChanged(it,password)},
+                            onValueChange = { LoginViewModel.onLoginChanged(it, password) },
                             modifier = Modifier.fillMaxWidth(),
                             label = { Text(text = "Email") },
                             placeholder = { Text(text = "Ejemplo@gmail.com") },
@@ -108,7 +112,7 @@ fun LoginPage(
                             maxLines = 1,
                             colors = TextFieldDefaults.textFieldColors(
                                 textColor = Color.Black,
-                                backgroundColor = Color(0xFFeeeeee),
+                                backgroundColor = Text200,
                                 focusedIndicatorColor = Color.Transparent,
                                 unfocusedIndicatorColor = Color.Transparent
                             )
@@ -117,7 +121,7 @@ fun LoginPage(
 
                         TextField(
                             value = password,
-                            onValueChange = { LoginViewModel.onLoginChanged(email,it)},
+                            onValueChange = { LoginViewModel.onLoginChanged(email, it) },
                             label = { Text(text = "Password") },
                             placeholder = { Text(text = "Ejemplo123") },
                             modifier = Modifier.fillMaxWidth(),
@@ -126,7 +130,7 @@ fun LoginPage(
                             maxLines = 1,
                             colors = TextFieldDefaults.textFieldColors(
                                 textColor = Color.Black,
-                                backgroundColor = Color(0xFFeeeeee),
+                                backgroundColor = Text200,
                                 focusedIndicatorColor = Color.Transparent,
                                 unfocusedIndicatorColor = Color.Transparent,
                             )
@@ -147,7 +151,8 @@ fun LoginPage(
                         }
 
                         Spacer(modifier = Modifier.padding(4.dp))
-                        Text(text = "Or",
+                        Text(
+                            text = "Or",
                             textAlign = TextAlign.Center,
                             modifier = Modifier.width(360.dp),
                             fontWeight = FontWeight.Black
@@ -159,7 +164,7 @@ fun LoginPage(
                                 .fillMaxWidth()
                                 .height(48.dp),
                             colors = ButtonDefaults.buttonColors(
-                                backgroundColor = Color(0xFFE0DADA)
+                                backgroundColor = btnGoogle
                             )
                         ) {
                             Text(text = "Sign In With ")
@@ -181,7 +186,7 @@ fun LoginPage(
                                 textAlign = TextAlign.Center,
                                 fontWeight = FontWeight.Bold,
                             ),
-                            onClick = {navController.navigate(Routes.Register.route)}
+                            onClick = { navController.navigate(Routes.Register.route) }
                         )
 
                     }
@@ -193,6 +198,8 @@ fun LoginPage(
         }
     }
 }
+
+
 
 @Composable
 fun AndroidLogo(
@@ -208,7 +215,7 @@ fun AndroidLogo(
         modifier = modifier
             .fillMaxSize()
             .padding(padding)
-            .background(Color(0xFFE0E5F3))
+            .background(Color.Transparent)
             .pointerInput(Unit) {
                 detectDragGestures(
                     onDrag = { change, dragAmount ->
