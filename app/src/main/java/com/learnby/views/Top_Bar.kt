@@ -123,7 +123,7 @@ fun Drawer(
 ) {
     Column {
         Image(
-            painterResource(id = R.drawable.encabezado_menu),
+            painterResource(id = R.drawable.learnbylogo),
             contentDescription = "Menu",
             modifier = Modifier
                 .height(160.dp)
@@ -156,17 +156,7 @@ fun DrawerItem(
 ) {
     Row(
         modifier = Modifier
-            /*Image(
-                  painterResource(id = item.icon),
-                  modifier = Modifier.size(30.dp),
-                  contentDescription = item.title
-              )
-              Spacer(modifier = Modifier.width(12.dp))
-
-              Text(
-                  text = item.title,
-                  style = MaterialTheme.typography.body1,
-              )*/      .fillMaxWidth()
+            .fillMaxWidth()
             .height(56.dp)
             .padding(6.dp)
             .clip(RoundedCornerShape(percent = 12))

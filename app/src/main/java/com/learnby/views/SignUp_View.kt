@@ -2,6 +2,7 @@ package com.learnby.views
 
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -11,14 +12,23 @@ import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.input.pointer.consumeAllChanges
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -37,6 +47,7 @@ fun SignUpPage(navController: NavHostController, RegisterViewModel: RegisterView
     val number: String by RegisterViewModel.phoneRg.observeAsState("")
 
 
+
     Box(
         Modifier
             .fillMaxWidth()
@@ -44,7 +55,9 @@ fun SignUpPage(navController: NavHostController, RegisterViewModel: RegisterView
     ) {
 
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 16.dp),
             contentAlignment = Alignment.BottomCenter
         ) {
             ConstraintLayout {
@@ -52,7 +65,7 @@ fun SignUpPage(navController: NavHostController, RegisterViewModel: RegisterView
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(620.dp)
+                        .height(520.dp)
                         .constrainAs(surface) {
                             bottom.linkTo(parent.bottom)
                         },
@@ -166,34 +179,6 @@ fun SignUpPage(navController: NavHostController, RegisterViewModel: RegisterView
                             Text(text = "Sign Up")
                         }
                         Spacer(modifier = Modifier.padding(4.dp))
-
-                        Text(
-                            text = "Or",
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.width(360.dp),
-                            fontWeight = FontWeight.Black
-                        )
-                        Spacer(modifier = Modifier.padding(4.dp))
-
-                        Button(
-                            onClick = { },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(48.dp),
-                            colors = ButtonDefaults.buttonColors(
-                                backgroundColor = Color(0xFFE0DADA)
-                            )
-                        ) {
-                            Text(text = "Sign Up With ")
-                            Text(text = "G", color = Color.Blue)
-                            Text(text = "o", color = Color.Red)
-                            Text(text = "o", color = Color.Yellow)
-                            Text(text = "g", color = Color.Blue)
-                            Text(text = "l", color = Color.Green)
-                            Text(text = "e", color = Color.Red)
-
-                        }
-
                     }
                 }
                 FloatingActionButton(
@@ -206,7 +191,7 @@ fun SignUpPage(navController: NavHostController, RegisterViewModel: RegisterView
                         },
                     backgroundColor = Color(0xFF994D51),
 
-                    onClick = {  }
+                    onClick = { navController.navigate("loginScreen") }
                 ) {
                     Icon(
                         imageVector = Icons.Default.KeyboardArrowLeft,
@@ -222,3 +207,4 @@ fun SignUpPage(navController: NavHostController, RegisterViewModel: RegisterView
     }
 
 }
+

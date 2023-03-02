@@ -37,8 +37,6 @@ import kotlin.math.absoluteValue
 @Composable
 fun VistaPythonCurso(navController: NavController) {
     TopBarView(navController = navController, view_page = CursoPython(navController))
-
-
 }
 
 @Composable

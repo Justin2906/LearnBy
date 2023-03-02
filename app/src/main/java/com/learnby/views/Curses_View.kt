@@ -1,29 +1,30 @@
 package com.learnby.views
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.typography
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import com.example.learnby.R
+import com.google.firebase.firestore.FirebaseFirestore
 import com.learnby.model.Cursos
-import com.learnby.model.cursosList
 import com.learnby.navigation.Routes
-import com.learnby.ui.theme.LearnByTheme
+import kotlinx.coroutines.tasks.await
 
 @Composable
 fun VistaCursos(navController: NavController) {
@@ -44,16 +45,10 @@ fun VistaCursos(navController: NavController) {
             )
         }
     ) {
-        com.learnby.views.Cursos(navController = navController)
+        Cursos(navController = navController, viewAll())
     }
-}
 
-@Composable
-fun Cursos(navController: NavController){
-    Column {
-        CursesList(cursosList = cursosList,
-            navController = navController)
-    }
+
 }
 
 @Composable
@@ -73,9 +68,9 @@ fun CursesCard(cursos: Cursos, navController: NavController
                 .padding(16.dp)
         ) {
             val imageModifier = Modifier
-                    .height(150.dp)
-                    .fillMaxWidth()
-                    .clip(shape = RoundedCornerShape(8.dp))
+                .height(150.dp)
+                .fillMaxWidth()
+                .clip(shape = RoundedCornerShape(8.dp))
 
             Image(
                 painter = image,
@@ -83,44 +78,43 @@ fun CursesCard(cursos: Cursos, navController: NavController
                 modifier = imageModifier,
                 contentScale = ContentScale.Crop
             )
-
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = cursos.tittle,
-                style = typography.h5,
+                text = cursos.tittle + "-" + cursos.dificulty,
+                style = typography.h4,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally),
                 color = Color.White
             )
 
-            for (description in cursos.description){
-                Text(
-                    text = description,
-                    style = typography.body2,
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally),
-                    color = Color.White
-                )
-            }
+            Text(
+                text = cursos.description,
+                style = typography.body1,
+                modifier = Modifier.padding(15.dp).align(Alignment.CenterHorizontally),
+                color = Color.White
+            )
 
             Button(
                 onClick = { navController.navigate(Routes.Py.route)},
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .fillMaxWidth()
-                        .height(40.dp)
-                        .padding(top = 5.dp)
+                    .fillMaxWidth()
+                    .height(40.dp)
+                    .padding(top = 5.dp)
             ) {
                 Text(
                     text = "Iniciar Curso",
                     color = Color.Black
                 )
             }
+
         }
+
+
     }
 }
+
 
 @Composable
 fun CursesList(cursosList: List<Cursos>, navController: NavController){
@@ -132,12 +126,46 @@ fun CursesList(cursosList: List<Cursos>, navController: NavController){
         }
     }
 }
-@Preview()
 @Composable
-fun Preview_curses() {
-    LearnByTheme() {
-        Surface {
-            VistaCursos(navController = rememberNavController())
-        }
+fun Cursos(navController: NavController, lista: List<Cursos>){
+    Column {
+        CursesList(lista,
+            navController = navController)
     }
+}
+
+@Composable
+fun viewAll(): List<Cursos> {
+    val db = FirebaseFirestore.getInstance()
+    var nombre_coleccion = "Curses"
+
+    var listaPlayers by remember { mutableStateOf(listOf<Cursos>()) }
+    var datosJugadores by remember { mutableStateOf("") }
+
+    db.collection(nombre_coleccion).limit(1)
+        .get()
+        .addOnSuccessListener { search ->
+
+            for (encontrado in search) {
+                //datosJugadores += "${document.id}: ${document.data}\n\n"
+                listaPlayers += Cursos(
+                    R.drawable.pythoncurso,
+                    encontrado["nameCurse"].toString(),
+                    encontrado["dificulty"].toString(),
+                    encontrado["description"].toString(),
+                )
+                Log.d("Datos", listaPlayers.toString())
+            }
+
+            datosJugadores += listaPlayers.toString()
+            if (datosJugadores.isEmpty()){
+                datosJugadores = "No existen registros"
+            }
+        }
+        .addOnFailureListener { exception ->
+            datosJugadores = "No se a podido recoger los datos"
+            Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+        }
+
+    return listaPlayers
 }
