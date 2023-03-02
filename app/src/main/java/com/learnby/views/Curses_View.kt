@@ -129,23 +129,20 @@ fun CursesList(cursosList: List<Cursos>, navController: NavController){
 @Composable
 fun Cursos(navController: NavController, lista: List<Cursos>){
     Column {
-        CursesList(lista,
-            navController = navController)
+        CursesList(lista, navController = navController)
     }
 }
 
 @Composable
 fun viewAll(): List<Cursos> {
     val db = FirebaseFirestore.getInstance()
-    var nombre_coleccion = "Curses"
-
+    val nombre_coleccion = "Curses"
     var listaPlayers by remember { mutableStateOf(listOf<Cursos>()) }
     var datosJugadores by remember { mutableStateOf("") }
 
-    db.collection(nombre_coleccion).limit(1)
+    db.collection(nombre_coleccion)
         .get()
         .addOnSuccessListener { search ->
-
             for (encontrado in search) {
                 //datosJugadores += "${document.id}: ${document.data}\n\n"
                 listaPlayers += Cursos(
@@ -154,7 +151,7 @@ fun viewAll(): List<Cursos> {
                     encontrado["dificulty"].toString(),
                     encontrado["description"].toString(),
                 )
-                Log.d("Datos", listaPlayers.toString())
+                //Log.d("Datos", listaPlayers.toString())
             }
 
             datosJugadores += listaPlayers.toString()
