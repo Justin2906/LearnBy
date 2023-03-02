@@ -18,5 +18,6 @@ fun NavigationHost() {
         composable(Login.route) { LoginPage(navigationController, LoginViewModel()) }
         composable(Register.route) { SignUpPage(navigationController, RegisterViewModel()) }
         composable(SplashScreen.route){SplashScreen(navigationController)}
+        composable(Curses.route){ VistaCursos(navigationController)}
     }
 }

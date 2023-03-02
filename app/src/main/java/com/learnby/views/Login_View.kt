@@ -1,5 +1,6 @@
 package com.learnby.views
 
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
@@ -21,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -36,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.learnby.MainActivity
 import com.learnby.navigation.Routes
 import com.learnby.ui.theme.Purple700
 import com.learnby.viewModel.LoginViewModel
@@ -44,8 +47,25 @@ import com.learnby.viewModel.LoginViewModel
 fun LoginPage(
     navController: NavHostController, LoginViewModel: LoginViewModel
 ) {
-    val email: String by LoginViewModel.email.observeAsState(initial = "")
+    val email: String by LoginViewModel.memail.observeAsState(initial = "")
     val password: String by LoginViewModel.password.observeAsState(initial = "")
+    val activity = LocalContext.current as MainActivity
+    val viewModel: LoginViewModel by activity.viewModels()
+    val loggedUser by viewModel.loggedUser().observeAsState(null)
+    val logged by viewModel.logged().observeAsState(false)
+    val isLoading by viewModel.isLoading().observeAsState(false)
+    val googleError by viewModel.googleError().observeAsState("")
+    val hasGoogleError by viewModel.hasGoogleError().observeAsState(false)
+
+    if (loggedUser != null && !logged) {
+        loggedUser!!.displayName?.let {
+            PopUpLogin(it) {
+                viewModel.logIn()
+                navController.navigate("curses")
+
+            }
+        }
+    }
 
     Box(
         Modifier
@@ -154,7 +174,7 @@ fun LoginPage(
                         )
                         Spacer(modifier = Modifier.padding(4.dp))
                         Button(
-                            onClick = { },
+                            onClick = { viewModel.logInWithGoogle(activity) },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(48.dp),
@@ -170,6 +190,14 @@ fun LoginPage(
                             Text(text = "l", color = Color.Green)
                             Text(text = "e", color = Color.Red)
 
+                        }
+                        if (hasGoogleError){
+                            Spacer(modifier = Modifier.size(20.dp))
+                            Text(text = googleError, color = Color.Red)
+                        }
+
+                        if (isLoading){
+                            CircularProgressIndicator()
                         }
 
                         ClickableText(
@@ -273,4 +301,23 @@ fun AndroidLogo(
         }
 
     }
+}
+@Composable
+fun PopUpLogin(name: String, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        text= {
+            Text(
+                text = name,
+                style = MaterialTheme.typography.body1,
+                color = MaterialTheme.colors.onSurface
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text(text = "Continuar")
+            }
+        },
+        backgroundColor = MaterialTheme.colors.surface
+    )
 }
