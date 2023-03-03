@@ -1,8 +1,11 @@
 package com.learnby.views
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.runtime.Composable
@@ -14,19 +17,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.learnby.model.Cursos
 import com.learnby.navigation.Routes
 import com.learnby.viewModel.CursesViewModel
+import coil.compose.rememberImagePainter
 
 @Composable
 fun VistaCursos(navController: NavController, viewModel: CursesViewModel) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val data by viewModel.cursesList.observeAsState(mutableListOf())
-
     viewModel.viewAll()
 
     val navigationItems = listOf(
@@ -44,17 +46,23 @@ fun VistaCursos(navController: NavController, viewModel: CursesViewModel) {
             )
         }
     ) {
-        data.forEach { pokemon ->
-            CursesCard(cursos = pokemon, navController = navController)
+        Column(
+            modifier = Modifier
+                .background(Color(0xFF212338))
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+
+        ) {
+            data.forEach { curso ->
+                CursesCard(cursos = curso, navController = navController)
+            }
         }
     }
-
-
 }
 
 @Composable
 fun CursesCard(cursos: Cursos, navController: NavController) {
-    val image = painterResource(cursos.imageResource)
+
     Surface(
         modifier = Modifier
             .padding(8.dp),
@@ -73,7 +81,7 @@ fun CursesCard(cursos: Cursos, navController: NavController) {
                 .clip(shape = RoundedCornerShape(8.dp))
 
             Image(
-                painter = image,
+                painter = rememberImagePainter(cursos.imageResource),
                 contentDescription = null,
                 modifier = imageModifier,
                 contentScale = ContentScale.Crop
@@ -81,7 +89,7 @@ fun CursesCard(cursos: Cursos, navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = cursos.tittle + "-" + cursos.dificulty,
+                text = cursos.tittle + " - " + cursos.dificulty,
                 style = typography.h4,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally),
@@ -98,7 +106,7 @@ fun CursesCard(cursos: Cursos, navController: NavController) {
             )
 
             Button(
-                onClick = { navController.navigate(Routes.Py.route) },
+                onClick = { navController.navigate(cursos.tittle + "View") },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 modifier = Modifier
                     .fillMaxWidth()

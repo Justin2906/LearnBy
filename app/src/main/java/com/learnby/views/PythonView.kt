@@ -31,7 +31,6 @@ import com.learnby.model.Contador
 import com.learnby.model.Python
 import com.learnby.model.pythonList
 import com.learnby.navigation.Routes
-import kotlin.math.absoluteValue
 
 
 @Composable

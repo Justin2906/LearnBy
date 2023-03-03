@@ -5,9 +5,9 @@ import android.util.Log
 import androidx.compose.runtime.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.learnby.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.learnby.model.Cursos
+import com.example.learnby.R
 
 class CursesViewModel {
     private val _CursesList = MutableLiveData<List<Cursos>>()
@@ -26,14 +26,12 @@ class CursesViewModel {
                 for (listaCurse in it) {
                     //datosJugadores += "${document.id}: ${document.data}\n\n"
                     val auxLista = Cursos(
-                        R.drawable.pythoncurso,
+                        listaCurse.get("img") as String,
                         listaCurse.get("nameCurse") as String,
-                        listaCurse["dificulty"].toString(),
-                        listaCurse["description"].toString(),
+                        listaCurse.get("dificulty") as String,
+                        listaCurse.get("description") as String,
                     )
                     curses.add(auxLista)
-                    //Log.d("Datos", listaCurses.toString())
-
                 }
                 _CursesList.value = curses
             }
