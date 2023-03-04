@@ -27,7 +27,6 @@ fun TopBarView(navController: NavController, view_page :Unit){
     val scope = rememberCoroutineScope()
     val navigationItems = listOf(
         Routes.Login
-
     )
     Scaffold(
         scaffoldState = scaffoldState,

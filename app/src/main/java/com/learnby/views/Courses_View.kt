@@ -19,13 +19,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.learnby.model.Cursos
+import com.learnby.model.Course
 import com.learnby.navigation.Routes
-import com.learnby.viewModel.CursesViewModel
+import com.learnby.viewModel.CoursesViewModel
 import coil.compose.rememberImagePainter
 
+
 @Composable
-fun VistaCursos(navController: NavController, viewModel: CursesViewModel) {
+fun VistaCursos(navController: NavController, viewModel: CoursesViewModel) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val data by viewModel.cursesList.observeAsState(mutableListOf())
@@ -61,8 +62,7 @@ fun VistaCursos(navController: NavController, viewModel: CursesViewModel) {
 }
 
 @Composable
-fun CursesCard(cursos: Cursos, navController: NavController) {
-
+fun CursesCard(cursos: Course, navController: NavController) {
     Surface(
         modifier = Modifier
             .padding(8.dp),

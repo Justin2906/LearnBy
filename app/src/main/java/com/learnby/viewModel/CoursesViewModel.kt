@@ -6,12 +6,11 @@ import androidx.compose.runtime.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import com.learnby.model.Cursos
-import com.example.learnby.R
+import com.learnby.model.Course
 
-class CursesViewModel {
-    private val _CursesList = MutableLiveData<List<Cursos>>()
-    val cursesList: LiveData<List<Cursos>> = _CursesList
+class CoursesViewModel {
+    private val _CursesList = MutableLiveData<List<Course>>()
+    val cursesList: LiveData<List<Course>> = _CursesList
 
     private val db = FirebaseFirestore.getInstance()
 
@@ -19,13 +18,13 @@ class CursesViewModel {
 
     @Composable
     fun viewAll(){
-        val curses: MutableList<Cursos> = mutableListOf<Cursos>()
+        val curses: MutableList<Course> = mutableListOf<Course>()
         db.collection(nombre_coleccion)
             .get()
             .addOnSuccessListener {
                 for (listaCurse in it) {
                     //datosJugadores += "${document.id}: ${document.data}\n\n"
-                    val auxLista = Cursos(
+                    val auxLista = Course(
                         listaCurse.get("img") as String,
                         listaCurse.get("nameCurse") as String,
                         listaCurse.get("dificulty") as String,

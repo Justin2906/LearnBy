@@ -1,8 +1,6 @@
 package com.learnby.model
 
-import androidx.annotation.DrawableRes
-
-data class Cursos(
+data class Course(
     val imageResource: String,
     val tittle: String,
     val dificulty: String?,

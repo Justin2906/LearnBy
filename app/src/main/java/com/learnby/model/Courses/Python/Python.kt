@@ -1,4 +1,4 @@
-package com.learnby.model
+package com.learnby.model.Courses.Python
 
 import androidx.annotation.DrawableRes
 import com.example.learnby.R
@@ -6,11 +6,11 @@ import com.example.learnby.R
 
 data class Python(
     @DrawableRes val imageResource: Int,
-    val title: String,
-    val description: List<String>
+    val info: String,
+    val description: String
 )
 
-val pythonList = listOf(
+/*val pythonList = listOf(
     Python(
         R.drawable.uno,
         title = "Tipos de Datos Primitivos Simples",
@@ -59,4 +59,4 @@ val pythonList = listOf(
             "- c.split(delimitador) : Devuelve la lista formada por las subcadenas que resultan de partir la cadena c usando como delimitador la cadena delimitador. Si no se especifica el delimitador utiliza por defecto el espacio en blanco."
         )
     )
-)
+)*/

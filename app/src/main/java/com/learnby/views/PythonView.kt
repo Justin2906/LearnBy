@@ -2,15 +2,14 @@ package com.learnby.views
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -20,27 +19,47 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.learnby.model.Contador
-import com.learnby.model.Python
-import com.learnby.model.pythonList
+import com.learnby.model.Courses.Python.Python
 import com.learnby.navigation.Routes
-
+import com.learnby.viewModel.PythonDviewModel
 
 @Composable
-fun VistaPythonCurso(navController: NavController) {
-    TopBarView(navController = navController, view_page = CursoPython(navController))
+fun PythonView(navController: NavController, pythonDviewModel: PythonDviewModel){
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+    val data by pythonDviewModel.documentationList.observeAsState(mutableListOf())
+    
+    val navigationItems = listOf(
+        Routes.Login
+    )
+    
+    pythonDviewModel.getDocumentation()
+    
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar = { TopBar(scope, scaffoldState) },
+        drawerContent = {
+            Drawer(
+                scope,
+                scaffoldState,
+                navController,
+                menu_items = navigationItems
+            )
+        },
+    ) {
+   
+    }
+
 }
 
 @Composable
 fun Documentacion(python: Python) {
-
     val image = painterResource(python.imageResource)
 
     Surface(
@@ -70,28 +89,30 @@ fun Documentacion(python: Python) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = python.title,
+                text = python.info,
                 style = MaterialTheme.typography.h5,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally),
                 color = Color.White
             )
 
-            for (description in python.description) {
-                Text(
-                    text = description,
-                    style = MaterialTheme.typography.body2,
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally),
-                    color = Color.White
-                )
-            }
+            
+            Text(
+                text = python.description,
+                style = MaterialTheme.typography.body2,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally),
+                color = Color.White
+            )
         }
     }
 }
 
 @Composable
-fun CursoPython(navController: NavController) {
+fun CursoPython(navController: NavController, pythonDviewModel: PythonDviewModel) {
+    val data by pythonDviewModel.documentationList.observeAsState(mutableListOf())
+    pythonDviewModel.getDocumentation()
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -133,7 +154,9 @@ fun CursoPython(navController: NavController) {
         }
 
         Column {
-            PythonList(pythonList = pythonList)
+            data.forEach { doc ->
+                Documentacion(python = doc)
+            }
         }
     }
 }
@@ -190,21 +213,4 @@ fun CircularProgressBarPy(
 
 }
 
-@Composable
-fun PythonList(pythonList: List<Python>) {
-    LazyColumn(
-        modifier = Modifier
-            .background(Color(0xFF212338))
-    ) {
-        items(pythonList) { python ->
-            Documentacion(python)
-        }
-    }
-}
-
-@Preview
-@Composable
-fun PreviewVistaCursos2() {
-    VistaPythonCurso(navController = rememberNavController())
-}
 
