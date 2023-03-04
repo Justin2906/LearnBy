@@ -16,7 +16,6 @@ class PythonDviewModel {
     private val _documentationList = MutableLiveData<List<Python>>()
     val documentationList: LiveData<List<Python>> = _documentationList
 
-
     private val db = FirebaseFirestore.getInstance()
 
     private val nombre_coleccion = "DocumentationPython"
@@ -31,7 +30,7 @@ class PythonDviewModel {
                 for (documentation in it) {
                     //datosJugadores += "${document.id}: ${document.data}\n\n"
                     val auxLista = Python(
-                        R.drawable.funcadenas,
+                        documentation.get("img") as String,
                         documentation.get("description") as String,
                         documentation.get("info") as String,
                     )
