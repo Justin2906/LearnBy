@@ -1,6 +1,6 @@
 package com.learnby.views
 
-import androidx.compose.foundation.BorderStroke
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
@@ -23,24 +23,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import com.learnby.MainActivity
 import com.learnby.navigation.Routes
-import com.learnby.ui.theme.LearnByTheme
-import com.learnby.ui.theme.btnGoogle
-import com.learnby.ui.theme.fondo200
-import com.learnby.ui.theme.surfaceColor
 import com.learnby.viewModel.LoginViewModel
 import com.learnby.viewModel.RegisterViewModel
 
@@ -51,6 +45,8 @@ fun SignUpPage(navController: NavHostController, RegisterViewModel: RegisterView
     val password = remember { mutableStateOf(TextFieldValue()) }
     val email = remember { mutableStateOf(TextFieldValue()) }
 
+
+
     Box(
         Modifier
             .fillMaxWidth()
@@ -59,26 +55,26 @@ fun SignUpPage(navController: NavHostController, RegisterViewModel: RegisterView
     ) {
         ConstraintLayout {
 
-            val (surface, fab) = createRefs()
-
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(720.dp)
-                    .constrainAs(surface) {
-                        bottom.linkTo(parent.bottom)
-                    },
-                color = surfaceColor,
-                border = BorderStroke(5.dp, Color.White),
-                shape = RoundedCornerShape(
-                    topStartPercent = 8,
-                    topEndPercent = 8
-                )
-            ) {
-                Column(
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 16.dp),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            ConstraintLayout {
+                val (surface, fab) = createRefs()
+                Surface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
+                        .height(520.dp)
+                        .constrainAs(surface) {
+                            bottom.linkTo(parent.bottom)
+                        },
+                    color = Color(0xFFA1BBE2),
+                    shape = RoundedCornerShape(
+                        topStartPercent = 8,
+                        topEndPercent = 8
+                    )
                 ) {
 
                     Text(
@@ -166,45 +162,19 @@ fun SignUpPage(navController: NavHostController, RegisterViewModel: RegisterView
                     )
                     Spacer(modifier = Modifier.padding(8.dp))
 
-                    Button(
-                        onClick = {},
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(48.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            backgroundColor = Color(0xFF994D51),
-                            contentColor = Color.White,
-                        )
-                    ) {
-                        Text(text = "Sign Up")
-                    }
-                    Spacer(modifier = Modifier.padding(4.dp))
-
-                    Text(
-                        text = "Or",
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.width(360.dp),
-                        fontWeight = FontWeight.Black
-                    )
-                    Spacer(modifier = Modifier.padding(4.dp))
-
-                    Button(
-                        onClick = { },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(48.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            backgroundColor = btnGoogle
-                        )
-                    ) {
-                        Text(text = "Sign Up With ")
-                        Text(text = "G", color = Color.Blue)
-                        Text(text = "o", color = Color.Red)
-                        Text(text = "o", color = Color.Yellow)
-                        Text(text = "g", color = Color.Blue)
-                        Text(text = "l", color = Color.Green)
-                        Text(text = "e", color = Color.Red)
-
+                        Button(
+                            onClick = { navController.navigate("LoginScreen") },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(48.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = Color(0xFF994D51),
+                                contentColor = Color.White,
+                            )
+                        ) {
+                            Text(text = "Sign Up")
+                        }
+                        Spacer(modifier = Modifier.padding(4.dp))
                     }
 
                 }
@@ -219,6 +189,13 @@ fun SignUpPage(navController: NavHostController, RegisterViewModel: RegisterView
                     },
                 backgroundColor = Color(0xFF994D51),
 
+                    onClick = { navController.navigate("loginScreen") }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowLeft,
+                        contentDescription = "Icon",
+                        modifier = Modifier.size(42.dp),
+                        tint = Color.White
 
                 onClick = {navController.navigate(Routes.Login.route) }
             ) {
@@ -235,3 +212,4 @@ fun SignUpPage(navController: NavHostController, RegisterViewModel: RegisterView
     }
 
 }
+
