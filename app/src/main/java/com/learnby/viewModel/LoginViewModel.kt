@@ -42,6 +42,7 @@ class LoginViewModel: ViewModel() {
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(activity.getString(R.string.default_web_client_id))
                 .requestEmail()
+                .requestId()
                 .build()
         // Build a GoogleSignInClient with the options specified by gso.
         val client = GoogleSignIn.getClient(activity, gso)

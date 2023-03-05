@@ -1,5 +1,6 @@
 package com.learnby.views
 
+import android.util.Log
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -34,6 +35,8 @@ import com.learnby.model.Courses.Python.Python
 import com.learnby.navigation.Routes
 import com.learnby.ui.theme.Shapes
 import com.learnby.viewModel.PythonDviewModel
+import com.learnby.viewModel.UserViewModel
+import kotlin.math.absoluteValue
 
 @Composable
 fun PythonView(navController: NavController){
@@ -56,15 +59,16 @@ fun PythonView(navController: NavController){
             )
         },
     ) {
-        CursoPython(navController, PythonDviewModel())
+        CursoPython(navController, PythonDviewModel(), UserViewModel())
     }
 
 }
 
 @Composable
-fun CursoPython(navController: NavController, pythonDviewModel: PythonDviewModel) {
+fun CursoPython(navController: NavController, pythonDviewModel: PythonDviewModel, userViewModel: UserViewModel) {
     val data by pythonDviewModel.documentationList.observeAsState(mutableListOf())
-    pythonDviewModel.getDocumentation()
+    val puntos by userViewModel.puntuacionUser.observeAsState()
+    //userViewModel.getPuntuacionByEmail("learnby190@gmail.com")
 
     Column(
         modifier = Modifier
@@ -73,45 +77,43 @@ fun CursoPython(navController: NavController, pythonDviewModel: PythonDviewModel
             .background(Color(0xFF212338))
             .verticalScroll(rememberScrollState())
     ) {
-        Column(
+        /*Column(
             modifier = Modifier
-                .height(210.dp)
-                .padding(8.dp)
+                .height(120.dp)
                 .fillMaxWidth()
+                .padding(10.dp)
         ) {
-
             Box(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(8.dp)
             ) {
                 CircularProgressBarPy(percentage = Contador.puntos, number = 100)
             }
-
-            Text(
-                text = "Puntuación",
-                style = MaterialTheme.typography.h6,
-                color = Color.White,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(8.dp)
-            )
-
-            Button(
-                onClick = { navController.navigate(Routes.Ques.route) },
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
-            ) {
-                Text(text = "Pon a prueba tus conocimientos")
-            }
         }
 
+        Text(
+            text = "Puntuación",
+            style = MaterialTheme.typography.h6,
+            color = Color.White,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(8.dp)
+        )*/
+
+        pythonDviewModel.getDocumentation()
         Column {
             data.forEach { doc ->
                 ExpandableCard(doc)
             }
+        }
 
+        Button(
+            onClick = { navController.navigate(Routes.Ques.route) },
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
+        ) {
+            Text(text = "Pon a prueba tus conocimientos")
         }
     }
 }
@@ -159,7 +161,7 @@ fun CircularProgressBarPy(
         }
 
         Text(
-            text = (curPecentage.value * number).toInt().toString() + "%",
+            text = (curPecentage.value * number).toInt().toString() + "pts",
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
             color = Color.White

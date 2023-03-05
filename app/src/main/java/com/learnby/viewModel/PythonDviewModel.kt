@@ -11,6 +11,7 @@ import com.learnby.model.Course
 import com.learnby.model.Courses.Python.Python
 import com.learnby.navigation.Routes
 import com.learnby.views.PythonView
+import org.checkerframework.checker.index.qual.LengthOf
 
 class PythonDviewModel {
     private val _documentationList = MutableLiveData<List<Python>>()
@@ -35,6 +36,7 @@ class PythonDviewModel {
                         documentation.get("info") as String,
                     )
                     docu.add(auxLista)
+                    Log.d("cursos", docu.toString())
                 }
                 _documentationList.value = docu
             }

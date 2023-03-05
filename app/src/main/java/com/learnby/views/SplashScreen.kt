@@ -16,14 +16,12 @@ import androidx.navigation.NavHostController
 import com.example.learnby.R
 import com.learnby.navigation.Routes
 import kotlinx.coroutines.delay
-
-
 @Composable
 fun SplashScreen(navController: NavHostController){
     LaunchedEffect(key1 = true){
         delay(4000)
         navController.popBackStack()
-        navController.navigate(Routes.Curses.route)
+        navController.navigate(Routes.Login.route)
     }
 
     Splash()

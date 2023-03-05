@@ -30,6 +30,7 @@ fun VistaCursos(navController: NavController, viewModel: CoursesViewModel) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val data by viewModel.cursesList.observeAsState(mutableListOf())
+
     viewModel.viewAll()
 
     val navigationItems = listOf(
