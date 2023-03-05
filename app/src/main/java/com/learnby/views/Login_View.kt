@@ -1,6 +1,7 @@
 package com.learnby.views
 
 import androidx.activity.viewModels
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
@@ -35,6 +36,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.learnby.MainActivity
 import com.learnby.navigation.Routes
+import com.learnby.ui.theme.*
 import com.learnby.viewModel.LoginViewModel
 
 @Composable

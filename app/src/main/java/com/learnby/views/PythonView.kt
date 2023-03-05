@@ -89,7 +89,7 @@ fun CursoPython(navController: NavController, pythonDviewModel: PythonDviewModel
             }
 
             Text(
-                text = "Progreso del Curso Actual",
+                text = "Puntuación",
                 style = MaterialTheme.typography.h6,
                 color = Color.White,
                 modifier = Modifier

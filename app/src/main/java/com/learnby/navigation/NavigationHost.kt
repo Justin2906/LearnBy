@@ -22,5 +22,6 @@ fun NavigationHost() {
         composable(SplashScreen.route){SplashScreen(navigationController)}
         composable(Curses.route){ VistaCursos(navigationController, CoursesViewModel())}
         composable(Py.route){ PythonView(navigationController) }
+        composable(Ques.route){ VistaQuestion(navigationController)}
     }
 }

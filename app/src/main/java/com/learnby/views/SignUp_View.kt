@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -35,6 +36,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.learnby.MainActivity
 import com.learnby.navigation.Routes
+import com.learnby.ui.theme.fondo200
 import com.learnby.viewModel.LoginViewModel
 import com.learnby.viewModel.RegisterViewModel
 
@@ -179,6 +181,7 @@ fun SignUpPage(navController: NavHostController, RegisterViewModel: RegisterView
 
                 }
             }
+            /*
             FloatingActionButton(
                 modifier = Modifier
                     .size(72.dp)
@@ -206,7 +209,7 @@ fun SignUpPage(navController: NavHostController, RegisterViewModel: RegisterView
                     tint = Color.White
 
                 )
-            }
+            }*/
         }
 
     }
