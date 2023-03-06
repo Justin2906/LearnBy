@@ -1,8 +1,6 @@
 package com.learnby.views
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -23,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.learnby.R
+import com.learnby.model.Contador
 import com.learnby.model.Preguntas
 import com.learnby.model.preguntasList
 import com.learnby.navigation.Routes
@@ -49,7 +48,7 @@ fun VistaQuestion(navController: NavController) {
             )
         },
     ) {
-        Question()
+        Question(navController)
     }
 
 }
@@ -64,7 +63,7 @@ fun DrawerQues(
 ) {
     Column {
         Image(
-            painterResource(id = R.drawable.encabezado_menu),
+            painterResource(id = R.drawable.learnbylogo),
             contentDescription = "Menu",
             modifier = Modifier
                 .height(160.dp)
@@ -119,19 +118,13 @@ fun DrawerItemQues(
 }
 
 @Composable
-fun Question() {
+fun Question(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
             .background(Color(0xFF212338))
     ) {
-        Column(
-            modifier = Modifier
-                .height(150.dp)
-                .padding(8.dp)
-                .fillMaxWidth()
-        ) {
             Text(
                 text = "Python Quiz",
                 style = MaterialTheme.typography.h3,
@@ -142,14 +135,24 @@ fun Question() {
                 style = MaterialTheme.typography.h6,
                 color = Color.White
             )
-        }
+            Button(
+            onClick = { navController.navigate("ResultView") },
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(60.dp)
+                .padding(8.dp)
+            ) {
+            Text(
+                text = "Terminar Prueba",
+                color = Color.Black
+            )
+            }
 
-        Column {
             preguntasList(preguntasList = preguntasList)
-        }
     }
-
 }
+
 
 @Composable
 fun PreguntasCard(preguntas: Preguntas) {
@@ -196,22 +199,33 @@ fun PreguntasCard(preguntas: Preguntas) {
                 color = Color.White
             )
             Button(
-                onClick = { enabled = !enabled },
+                onClick = {
+                    if (preguntas.Answer1 == preguntas.AnswerCorrect){
+                        Contador.puntos = (Contador.puntos) + 0.25f
+                    }
+                    enabled = !enabled},
                 colors = ButtonDefaults.buttonColors(backgroundColor = color),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .fillMaxWidth(),
                 enabled = enabled
+
             ) {
                 Text(
                     text = preguntas.Answer1,
                     style = MaterialTheme.typography.body2,
-                    color = Color.Black
+                    color = Color.Black,
+
                 )
             }
 
             Button(
-                onClick = { enabled = !enabled },
+                onClick = {
+                    if (preguntas.Answer2 == preguntas.AnswerCorrect){
+                        Contador.puntos = (Contador.puntos) + 0.25f
+                    }
+                    enabled = !enabled
+                          },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -225,7 +239,12 @@ fun PreguntasCard(preguntas: Preguntas) {
             }
 
             Button(
-                onClick = { enabled = !enabled },
+                onClick = {
+                    if (preguntas.Answer3 == preguntas.AnswerCorrect){
+                        Contador.puntos = (Contador.puntos) + 0.25f
+                    }
+                    enabled = !enabled
+                          },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -238,8 +257,6 @@ fun PreguntasCard(preguntas: Preguntas) {
                     color = Color.Black
                 )
             }
-
-
         }
     }
 }

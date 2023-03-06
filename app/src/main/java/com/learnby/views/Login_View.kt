@@ -66,9 +66,8 @@ fun LoginPage(
     Box(
         Modifier
             .fillMaxWidth()
-            .background(fondo200
-                /*brush = Brush.linearGradient(
-                    colors = listOf(White200, Red500)*/
+            .background(
+                Color(0xFFF8FCFD)
             )
     )
     {

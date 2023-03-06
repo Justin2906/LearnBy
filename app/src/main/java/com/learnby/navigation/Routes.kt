@@ -10,7 +10,8 @@ sealed class Routes(
     object Curses : Routes("curses")
     object Ques : Routes("ques")
     object Py : Routes("PythonView")
-
     object Login : Routes("LoginScreen")
     object Register : Routes("RegisterScreen")
+
+    object Resultado: Routes("ResultView")
 }
