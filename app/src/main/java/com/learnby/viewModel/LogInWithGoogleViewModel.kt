@@ -3,7 +3,6 @@ package com.learnby.viewModel
 import android.app.Activity
 import android.content.Intent
 import android.util.Log
-import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 
-class LoginViewModel: ViewModel() {
+class LogInWithGoogleViewModel() : ViewModel() {
     private val isLoading = MutableLiveData(false)
     private val logged = MutableLiveData(false)
     private val hasGoogleError = MutableLiveData(false)
@@ -42,7 +41,6 @@ class LoginViewModel: ViewModel() {
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(activity.getString(R.string.default_web_client_id))
                 .requestEmail()
-                .requestId()
                 .build()
         // Build a GoogleSignInClient with the options specified by gso.
         val client = GoogleSignIn.getClient(activity, gso)
@@ -78,25 +76,5 @@ class LoginViewModel: ViewModel() {
 
         }
     }
-
-    private val _email =  MutableLiveData<String>()
-    val memail : LiveData<String> = _email
-
-    private val _password =  MutableLiveData<String>()
-    val password : LiveData<String> = _password
-
-    private val _loginEnable =  MutableLiveData<Boolean>()
-    val loginEnable : LiveData<Boolean> = _loginEnable
-
-    fun onLoginChanged(email: String, password: String) {
-        _email.value = email
-        _password.value = password
-        //habilitara o desahabilitara el boton sign in
-        _loginEnable.value = validarEmail(email) && validarPassword(password)
-    }
-
-    private fun validarPassword(password: String): Boolean = password.length >8
-
-    private fun validarEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
 }

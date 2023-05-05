@@ -6,10 +6,12 @@ sealed class Routes(
     val route: String
 
     ) {
+    object SplashScreen: Routes("SplashScreen")
     object Curses : Routes("curses")
     object Ques : Routes("ques")
-    object Py : Routes("py")
-
+    object Py : Routes("PythonView")
     object Login : Routes("LoginScreen")
     object Register : Routes("RegisterScreen")
+
+    object Resultado: Routes("ResultView")
 }
