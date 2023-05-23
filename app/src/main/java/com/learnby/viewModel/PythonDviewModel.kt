@@ -31,7 +31,7 @@ class PythonDviewModel {
                 for (documentation in it) {
                     //datosJugadores += "${document.id}: ${document.data}\n\n"
                     val auxLista = Python(
-                        documentation.get("img") as String,
+                        documentation.get("imagen") as String,
                         documentation.get("description") as String,
                         documentation.get("info") as String,
                     )
