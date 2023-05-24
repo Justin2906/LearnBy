@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "559371449953",
-    "project_id": "learnby-6b90d",
-    "storage_bucket": "learnby-6b90d.appspot.com"
+    "project_number": "323685172192",
+    "project_id": "learnby-42cf7",
+    "storage_bucket": "learnby-42cf7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:559371449953:android:71c7f63ec45336cfe89c20",
+        "mobilesdk_app_id": "1:323685172192:android:31f920053de5a23cb02185",
         "android_client_info": {
           "package_name": "com.example.learnby"
         }
       },
       "oauth_client": [
         {
-          "client_id": "559371449953-sqj580ipfsk7pijrkavg4fe4h25pk6qm.apps.googleusercontent.com",
+          "client_id": "323685172192-7dtjr34gm4u15j0cqufdqu8vkevki2eu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAOESeqEL_LxVhXO65a4-yrFjlst3L_rgc"
+          "current_key": "AIzaSyDcv8x5YMbSH8BJ3vhEB7qkd5jRHEbj8P8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "559371449953-akldedvlbse4cvrhh21q1mht3urbg102.apps.googleusercontent.com",
+              "client_id": "323685172192-7dtjr34gm4u15j0cqufdqu8vkevki2eu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
