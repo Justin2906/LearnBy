@@ -27,8 +27,8 @@ class CoursesViewModel {
                 for (listaCurse in it) {
                     //datosJugadores += "${document.id}: ${document.data}\n\n"
                     val auxLista = Course(
-                        listaCurse.get("icon") as String,
-                        listaCurse.get("imagen") as String,
+                        listaCurse.get("iconImage") as String,
+                        listaCurse.get("image") as String,
                         listaCurse.get("nameCourse") as String,
                         listaCurse.get("dificulty") as String,
                         listaCurse.get("description") as String,
