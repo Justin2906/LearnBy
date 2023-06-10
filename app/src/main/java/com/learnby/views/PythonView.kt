@@ -68,7 +68,6 @@ fun PythonView(navController: NavController){
 fun CursoPython(navController: NavController, pythonDviewModel: PythonDviewModel, userViewModel: UserViewModel) {
     val data by pythonDviewModel.documentationList.observeAsState(mutableListOf())
     val puntos by userViewModel.puntuacionUser.observeAsState()
-    //userViewModel.getPuntuacionByEmail("learnby190@gmail.com")
 
     Column(
         modifier = Modifier
@@ -77,28 +76,6 @@ fun CursoPython(navController: NavController, pythonDviewModel: PythonDviewModel
             .background(Color(0xFF212338))
             .verticalScroll(rememberScrollState())
     ) {
-        /*Column(
-            modifier = Modifier
-                .height(120.dp)
-                .fillMaxWidth()
-                .padding(10.dp)
-        ) {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-            ) {
-                CircularProgressBarPy(percentage = Contador.puntos, number = 100)
-            }
-        }
-
-        Text(
-            text = "Puntuación",
-            style = MaterialTheme.typography.h6,
-            color = Color.White,
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(8.dp)
-        )*/
 
         pythonDviewModel.getDocumentation()
         Column {

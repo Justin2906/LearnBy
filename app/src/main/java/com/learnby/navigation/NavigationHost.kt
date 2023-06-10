@@ -24,5 +24,12 @@ fun NavigationHost() {
         composable(Py.route){ PythonView(navigationController) }
         composable(Ques.route){ VistaQuestion(navigationController)}
         composable(Resultado.route){ FinalViewResult(navigationController) }
+
+        //BottomBar
+        composable(BottomNavItem.Profile.route) { ProfileScreen(navigationController) }
+        composable(BottomNavItem.Test.route) {  }
+        composable(BottomNavItem.Home.route) { VistaCursos(navigationController, CoursesViewModel()) }
+        composable(BottomNavItem.Saves.route) {  }
+        composable(BottomNavItem.Exit.route){ LoginPage(navigationController, LoginViewModel()) }
     }
 }

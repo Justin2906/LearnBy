@@ -22,6 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
@@ -29,35 +30,25 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.learnby.model.Course
 import com.learnby.navigation.Routes
 import com.learnby.viewModel.CoursesViewModel
 import coil.compose.rememberImagePainter
 import com.example.learnby.R
-
+import com.learnby.navigation.BottomNavItem
+import com.learnby.ui.theme.surfaceColor
 
 @Composable
 fun VistaCursos(navController: NavController, viewModel: CoursesViewModel) {
     val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
     val data by viewModel.cursesList.observeAsState(mutableListOf())
 
     viewModel.viewAll()
 
-    val navigationItems = listOf(
-        Routes.Login
-    )
     Scaffold(
+        bottomBar = { BottomNavigationScreen(navController = navController) },
         scaffoldState = scaffoldState,
-        topBar = { TopBar(scope, scaffoldState) },
-        drawerContent = {
-            Drawer(
-                scope,
-                scaffoldState,
-                navController,
-                menu_items = navigationItems
-            )
-        }
     ) {
         Column(
             modifier = Modifier
@@ -67,15 +58,15 @@ fun VistaCursos(navController: NavController, viewModel: CoursesViewModel) {
 
         ) {
             data.forEach { curso ->
-                //CursesCard(cursos = curso, navController = navController)
-                StandardCard2(cursos = curso, navController = navController)
+                StandardCard(cursos = curso, navController = navController)
             }
+            Spacer(modifier = Modifier.height(100.dp))
         }
     }
 }
 
 @Composable
-fun StandardCard2(
+fun StandardCard(
     cursos: Course, navController: NavController,
     modifier: Modifier = Modifier,
     elevation: Dp = 1.dp,
@@ -183,67 +174,3 @@ fun StandardCard2(
         }
     }
 }
-
-/*@Composable
-fun CursesCard(cursos: Course, navController: NavController) {
-    Surface(
-        modifier = Modifier
-            .padding(8.dp),
-        shape = RoundedCornerShape(8.dp),
-        elevation = 8.dp,
-        color = Color(0xFF373960)
-    ) {
-
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-        ) {
-            val imageModifier = Modifier
-                .height(150.dp)
-                .fillMaxWidth()
-                .clip(shape = RoundedCornerShape(8.dp))
-
-            Image(
-                painter = rememberImagePainter(cursos.imageResource),
-                contentDescription = null,
-                modifier = imageModifier,
-                contentScale = ContentScale.Crop
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Text(
-                text = cursos.tittle + " - " + cursos.dificulty,
-                style = typography.h4,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally),
-                color = Color.White
-            )
-
-            Text(
-                text = cursos.description,
-                style = typography.body1,
-                modifier = Modifier
-                    .padding(15.dp)
-                    .align(Alignment.CenterHorizontally),
-                color = Color.White
-            )
-
-            Button(
-                onClick = { navController.navigate(cursos.tittle + "View") },
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(40.dp)
-                    .padding(top = 5.dp)
-            ) {
-                Text(
-                    text = "Iniciar Curso",
-                    color = Color.Black
-                )
-            }
-
-        }
-
-
-    }
-}*/
