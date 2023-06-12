@@ -67,7 +67,7 @@ fun LoginPage(
         Modifier
             .fillMaxWidth()
             .background(
-                Color(0xFFF8FCFD)
+                Color(0xFF212338)
             )
     )
     {
@@ -111,8 +111,9 @@ fun LoginPage(
 
                         Text(
                             fontWeight = FontWeight.Bold,
-                            text = "Welcome To LearnBy",
+                            text = "Bienvenido a LearnBy",
                             textAlign = TextAlign.Center,
+                            color = Color.White,
                             modifier = Modifier.width(360.dp),
                             style = TextStyle(
                                 fontSize = 35.sp,
@@ -166,7 +167,10 @@ fun LoginPage(
                                 )
                             )
                         ) {
-                            Text(text = "Sign In")
+                            Text(
+                                text = "Sign In",
+                                color = Color.White
+                            )
                         }
 
                         Spacer(modifier = Modifier.padding(4.dp))
@@ -212,6 +216,7 @@ fun LoginPage(
                                 fontSize = 20.sp,
                                 textAlign = TextAlign.Center,
                                 fontWeight = FontWeight.Bold,
+                                color = Color.White
                             ),
                             onClick = { navController.navigate(Routes.Register.route) }
                         )
