@@ -7,6 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.learnby.model.Course
+import java.io.Console
+import kotlin.math.log
 
 class CoursesViewModel {
     private val _CursesList = MutableLiveData<List<Course>>()
@@ -14,7 +16,7 @@ class CoursesViewModel {
 
     private val db = FirebaseFirestore.getInstance()
 
-    private val nombre_coleccion = "Curses"
+    private val nombre_coleccion = "Courses"
 
     @Composable
     fun viewAll(){
@@ -25,14 +27,16 @@ class CoursesViewModel {
                 for (listaCurse in it) {
                     //datosJugadores += "${document.id}: ${document.data}\n\n"
                     val auxLista = Course(
-                        listaCurse.get("img") as String,
-                        listaCurse.get("nameCurse") as String,
+                        listaCurse.get("iconImage") as String,
+                        listaCurse.get("image") as String,
+                        listaCurse.get("nameCourse") as String,
                         listaCurse.get("dificulty") as String,
                         listaCurse.get("description") as String,
                     )
                     curses.add(auxLista)
                 }
                 _CursesList.value = curses
+                Log.d("value", _CursesList.value.toString())
             }
             .addOnFailureListener { exception ->
                 Log.w(ContentValues.TAG, "Error getting documents: ", exception)

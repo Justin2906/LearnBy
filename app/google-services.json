@@ -1,78 +1,33 @@
 {
   "project_info": {
-    "project_number": "487487553238",
-    "project_id": "learnby-e08fb",
-    "storage_bucket": "learnby-e08fb.appspot.com"
+    "project_number": "323685172192",
+    "project_id": "learnby-42cf7",
+    "storage_bucket": "learnby-42cf7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:487487553238:android:7efb95c49219de4fa41377",
+        "mobilesdk_app_id": "1:323685172192:android:31f920053de5a23cb02185",
         "android_client_info": {
           "package_name": "com.example.learnby"
         }
       },
       "oauth_client": [
         {
-          "client_id": "487487553238-sqh1ab0ejqvqrn3nn0lhqjh1bvjgabl1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.learnby",
-            "certificate_hash": "20583a647dce390a0dffb69f56b6153cd19d881f"
-          }
-        },
-        {
-          "client_id": "487487553238-tcvi40j820h2r81abvlghug3vq466kvb.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.learnby",
-            "certificate_hash": "2941d6823c03553d53b064ed1c30c95f65c18210"
-          }
-        },
-        {
-          "client_id": "487487553238-o538qsughblur9d999pr4grv2ir457hp.apps.googleusercontent.com",
+          "client_id": "323685172192-7dtjr34gm4u15j0cqufdqu8vkevki2eu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBptnW0G-VTed0t2g_Hul3w9ibKqrOBlz4"
+          "current_key": "AIzaSyDcv8x5YMbSH8BJ3vhEB7qkd5jRHEbj8P8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "487487553238-76ao8s5g843vsjoqlt8enieeqh87l65i.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:487487553238:android:dec14595ecb0a583a41377",
-        "android_client_info": {
-          "package_name": "com.learnby"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "487487553238-o538qsughblur9d999pr4grv2ir457hp.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBptnW0G-VTed0t2g_Hul3w9ibKqrOBlz4"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "487487553238-76ao8s5g843vsjoqlt8enieeqh87l65i.apps.googleusercontent.com",
+              "client_id": "323685172192-7dtjr34gm4u15j0cqufdqu8vkevki2eu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
