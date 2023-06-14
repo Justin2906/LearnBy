@@ -41,33 +41,18 @@ import kotlin.math.absoluteValue
 @Composable
 fun PythonView(navController: NavController){
     val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-    
-    val navigationItems = listOf(
-        Routes.Login
-    )
 
     Scaffold(
+        bottomBar = { BottomNavigationScreen( navController ) },
         scaffoldState = scaffoldState,
-        topBar = { TopBar(scope, scaffoldState) },
-        drawerContent = {
-            Drawer(
-                scope,
-                scaffoldState,
-                navController,
-                menu_items = navigationItems
-            )
-        },
     ) {
         CursoPython(navController, PythonDviewModel(), UserViewModel())
     }
-
 }
 
 @Composable
 fun CursoPython(navController: NavController, pythonDviewModel: PythonDviewModel, userViewModel: UserViewModel) {
     val data by pythonDviewModel.documentationList.observeAsState(mutableListOf())
-    val puntos by userViewModel.puntuacionUser.observeAsState()
 
     Column(
         modifier = Modifier
@@ -76,14 +61,6 @@ fun CursoPython(navController: NavController, pythonDviewModel: PythonDviewModel
             .background(Color(0xFF212338))
             .verticalScroll(rememberScrollState())
     ) {
-
-        pythonDviewModel.getDocumentation()
-        Column {
-            data.forEach { doc ->
-                ExpandableCard(doc)
-            }
-        }
-
         Button(
             onClick = { navController.navigate(Routes.Ques.route) },
             modifier = Modifier
@@ -92,60 +69,18 @@ fun CursoPython(navController: NavController, pythonDviewModel: PythonDviewModel
         ) {
             Text(text = "Pon a prueba tus conocimientos")
         }
-    }
-}
 
-@Composable
-fun CircularProgressBarPy(
-    percentage: Float,
-    number: Int,
-    fontSize: TextUnit = 28.sp,
-    radius: Dp = 50.dp,
-    color: Color = Color.Green,
-    strokeWidth: Dp = 8.dp,
-    animDuration: Int = 1000,
-    animDelay: Int = 0
-) {
-    var animationPlayed by remember {
-        mutableStateOf(false)
-    }
-    val curPecentage = animateFloatAsState(
-        targetValue = if (animationPlayed) percentage else 0f,
-        animationSpec = tween(
-            durationMillis = animDuration,
-            delayMillis = animDelay
-        )
-
-    )
-
-    LaunchedEffect(key1 = true) {
-        animationPlayed = true
-    }
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .size(radius * 2f),
-    ) {
-        Canvas(modifier = Modifier.size(radius * 2f)) {
-            drawArc(
-                color = color,
-                -90f,
-                360 * curPecentage.value,
-                useCenter = false,
-                style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
-            )
+        pythonDviewModel.getDocumentation()
+        Column {
+            data.forEach { doc ->
+                ExpandableCard(doc)
+            }
         }
 
-        Text(
-            text = (curPecentage.value * number).toInt().toString() + "pts",
-            fontSize = fontSize,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-            )
-    }
 
+    }
 }
+
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

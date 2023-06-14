@@ -19,10 +19,15 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginViewModel: ViewModel() {
     private val isLoading = MutableLiveData(false)
+
     private val logged = MutableLiveData(false)
+
     private val hasGoogleError = MutableLiveData(false)
+
     private val googleError = MutableLiveData("")
+
     private val email = MutableLiveData("")
+
     private val loggedUser = MutableLiveData(FirebaseAuth.getInstance().currentUser)
     fun loggedUser(): MutableLiveData<FirebaseUser?> = loggedUser
     fun isLoading(): LiveData<Boolean> = isLoading
