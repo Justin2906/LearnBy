@@ -24,6 +24,7 @@ fun NavigationHost() {
         composable(Py.route){ PythonView(navigationController) }
         composable(Ques.route){ Question(navigationController)}
         composable(Resultado.route){ FinalViewResult(navigationController) }
+        composable(Edit.route){ EditProfileScreen(navigationController)}
 
         //BottomBar
         composable(BottomNavItem.Profile.route) { ProfileScreen(navigationController) }

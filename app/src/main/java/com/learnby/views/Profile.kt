@@ -19,9 +19,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.example.learnby.R
 import com.google.firebase.auth.FirebaseAuth
+import com.learnby.navigation.Routes
 import com.learnby.ui.theme.LearnByTheme
 import com.learnby.viewModel.CoursesViewModel
 
@@ -40,12 +42,12 @@ fun ProfileScreen(navController: NavController) {
                 .verticalScroll(rememberScrollState())
 
         ) {
-            Profile()
+            Profile(navController)
         }
     }
 }
 @Composable
-fun Profile() {
+fun Profile(navController: NavController) {
     val user = FirebaseAuth.getInstance().currentUser
 
     val imageModifier = Modifier
@@ -84,10 +86,13 @@ fun Profile() {
             Spacer(modifier = Modifier.width(160.dp))
 
             Button(
-                onClick = { },
+                onClick = { navController.navigate(Routes.Edit.route)},
                 modifier = Modifier.padding(top = 16.dp)
             ) {
-                Text(text = "Editar perfil", color = Color.Black)
+                Text(
+                    text = "Editar perfil",
+                    color = Color.Black
+                )
             }
 
         }
@@ -123,12 +128,50 @@ fun Profile() {
         )
 
     }
+
+        Card(
+            modifier = Modifier
+                .background(Color(0xFF212338))
+                .padding(16.dp),
+            elevation = 4.dp
+        ) {
+            Column(
+                modifier = Modifier
+                    .background(Color(0xFF373960))
+                    .fillMaxSize()
+                    .padding(16.dp),
+
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            )
+            {
+                Text(
+                    text = "Estadísticas",
+                    color = Color.White,
+                    style = MaterialTheme.typography.h6
+
+                )
+                Text(
+                    text = "Cursos realizados: 7",
+                    style = MaterialTheme.typography.body1,
+                    color = Color.White,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+                Text(
+                    text = "Puntuación media: 56%",
+                    style = MaterialTheme.typography.body1,
+                    color = Color.White,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            }
+        }
+
 }
 
 @Preview
 @Composable
 fun PreviewProfile() {
     LearnByTheme {
-        Profile()
+        Profile(navController = rememberNavController())
     }
 }

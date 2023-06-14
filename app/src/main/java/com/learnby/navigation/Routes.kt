@@ -13,5 +13,6 @@ sealed class Routes(
     object Register : Routes("RegisterScreen")
     object Resultado: Routes("ResultView")
     object Profile: Routes("Profile")
+    object  Edit: Routes("EditProfile")
 
 }
