@@ -1,43 +1,32 @@
 package com.learnby.views
 
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Share
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import com.learnby.model.Course
-import com.learnby.navigation.Routes
 import com.learnby.viewModel.CoursesViewModel
 import coil.compose.rememberImagePainter
-import com.example.learnby.R
-import com.learnby.navigation.BottomNavItem
-import com.learnby.ui.theme.surfaceColor
+import com.learnby.model.FavCourses
 
 @Composable
 fun VistaCursos(navController: NavController, viewModel: CoursesViewModel) {
@@ -58,7 +47,7 @@ fun VistaCursos(navController: NavController, viewModel: CoursesViewModel) {
 
         ) {
             data.forEach { curso ->
-                StandardCard(cursos = curso, navController = navController)
+                StandardCard(viewModel,cursos = curso, navController = navController)
             }
             Spacer(modifier = Modifier.height(100.dp))
         }
@@ -67,14 +56,20 @@ fun VistaCursos(navController: NavController, viewModel: CoursesViewModel) {
 
 @Composable
 fun StandardCard(
-    cursos: Course, navController: NavController,
+    viewModel: CoursesViewModel,
+    cursos: Course,
+    navController: NavController,
     modifier: Modifier = Modifier,
     elevation: Dp = 1.dp,
-    border: BorderStroke? = null,
     background: Color = Color(0xFF373960),
     contentColor: Color = contentColorFor(background),
     shape: Shape = MaterialTheme.shapes.medium
 ) {
+    var selected by rememberSaveable { mutableStateOf(true) }
+
+    var icon = if (selected) Icons.Default.FavoriteBorder else Icons.Default.Favorite
+
+
     Card(
         backgroundColor = background,
         contentColor = contentColor,
@@ -165,8 +160,12 @@ fun StandardCard(
 
                     //Iconos
                     Row(modifier = Modifier.align(Alignment.CenterEnd)) {
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(Icons.Default.FavoriteBorder, contentDescription = null, tint = Color.Red)
+                        IconButton(onClick = {
+                            selected = !selected
+                            Log.d("id", cursos.id)
+                            viewModel.searchFav( cursos.id)
+                        }) {
+                            Icon(icon, contentDescription = null, tint = Color.Red)
                         }
                     }
                 }

@@ -6,8 +6,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.learnby.navigation.Routes.*
 import com.learnby.viewModel.CoursesViewModel
+import com.learnby.viewModel.FavViewModel
 import com.learnby.viewModel.LoginViewModel
-import com.learnby.viewModel.PythonDviewModel
 import com.learnby.viewModel.RegisterViewModel
 import com.learnby.views.*
 
@@ -22,14 +22,13 @@ fun NavigationHost() {
         composable(SplashScreen.route){SplashScreen(navigationController)}
         composable(Curses.route){ VistaCursos(navigationController, CoursesViewModel())}
         composable(Py.route){ PythonView(navigationController) }
-        composable(Ques.route){ VistaQuestion(navigationController)}
+        composable(Ques.route){ Question(navigationController)}
         composable(Resultado.route){ FinalViewResult(navigationController) }
 
         //BottomBar
         composable(BottomNavItem.Profile.route) { ProfileScreen(navigationController) }
-        composable(BottomNavItem.Test.route) {  }
         composable(BottomNavItem.Home.route) { VistaCursos(navigationController, CoursesViewModel()) }
-        composable(BottomNavItem.Saves.route) {  }
+        composable(BottomNavItem.Saves.route) { VistaFavs(navigationController, FavViewModel()) }
         composable(BottomNavItem.Exit.route){ LoginPage(navigationController, LoginViewModel()) }
     }
 }

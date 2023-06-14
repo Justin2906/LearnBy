@@ -19,7 +19,7 @@ class PythonDviewModel {
 
     private val db = FirebaseFirestore.getInstance()
 
-    private val nombre_coleccion = "DocumentationPython"
+    private val nombre_coleccion = "documentationPython"
 
     @Composable
     fun getDocumentation(){
@@ -31,9 +31,9 @@ class PythonDviewModel {
                 for (documentation in it) {
                     //datosJugadores += "${document.id}: ${document.data}\n\n"
                     val auxLista = Python(
-                        documentation.get("imagen") as String,
+                        documentation.get("referenceImage") as String,
                         documentation.get("description") as String,
-                        documentation.get("info") as String,
+                        documentation.get("information") as String,
                     )
                     docu.add(auxLista)
                     Log.d("cursos", docu.toString())

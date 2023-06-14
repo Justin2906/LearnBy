@@ -23,7 +23,6 @@ import com.learnby.navigation.BottomNavItem
 fun BottomNavigationScreen(navController: NavController) {
     val items = listOf(
         BottomNavItem.Profile,
-        BottomNavItem.Test,
         BottomNavItem.Home,
         BottomNavItem.Saves,
         BottomNavItem.Exit
