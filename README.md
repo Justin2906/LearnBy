@@ -7,7 +7,7 @@ LearnBy es una aplicación móvil diseñada para ayudarte a aprender a programar
 - Acceso sin conexión: Aprende a programar en cualquier momento y en cualquier lugar, incluso sin conexión a internet.
 - Documentación exhaustiva: Encuentra documentación detallada sobre tecnologías como Angular, Python y Java para ayudarte a comprender los conceptos fundamentales.
 - Ejercicios prácticos: Pon en práctica tus habilidades con una amplia variedad de ejercicios interactivos diseñados para fortalecer tu comprensión.
-Certificados de finalización: Obtén certificados de finalización al completar con éxito los cursos y ejercicios, lo que te ayuda a mantener un registro de tu progreso.
+- Certificados de finalización: Obtén certificados de finalización al completar con éxito los cursos y ejercicios, lo que te ayuda a mantener un registro de tu progreso.
 - Interfaz intuitiva: Navega fácilmente a través de la aplicación con una interfaz de usuario intuitiva y amigable.
 
 # Tecnologías Utilizadas
