@@ -1,4 +1,4 @@
-# LearnBy - Aprende a Programar
+# LearnBy - El duolingo de la Programación
 
 # Descripción
 LearnBy es una aplicación móvil diseñada para ayudarte a aprender a programar desde la comodidad de tu dispositivo móvil, sin necesidad de estar conectado a internet. Con una amplia gama de recursos que incluyen documentación, ejercicios prácticos y certificados de tecnologías populares como Angular, Python y Java, LearnBy es tu compañero perfecto en el viaje de convertirte en un programador experto.
