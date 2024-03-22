@@ -11,11 +11,11 @@ Certificados de finalización: Obtén certificados de finalización al completar
 Interfaz intuitiva: Navega fácilmente a través de la aplicación con una interfaz de usuario intuitiva y amigable.
 
 # Tecnologías Utilizadas
-- Kotlin Como tecnología Dominante
-- Jetpack Compose
-- Firebase
-- Canva
-- Google Authenticator
+- Kotlin (tecnología Dominante)
+- Jetpack Compose (Diseño de interfaces)
+- Firebase (Base de Datos)
+- Canva (Diseño de Animaciones)
+- Google Authenticator (Dar de alta Usuarios)
 
   
 # Instalación
